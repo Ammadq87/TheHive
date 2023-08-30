@@ -16,9 +16,11 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @JsonProperty("firstName")
     @Column(name = "firstName")
     private String firstName;
 
+    @JsonProperty("lastName")
     @Column(name = "lastName")
     private String lastName;
 
