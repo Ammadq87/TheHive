@@ -1,3 +1,5 @@
+DROP SCHEMA TheHive;
+
 CREATE SCHEMA TheHive;
 
 USE TheHive;
