@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      'white': '#ffffff',
+      'purple': '#6345D5'
+    }
   },
   plugins: [
     require('flowbite/plugin')

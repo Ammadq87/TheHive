@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="289f692e-a0f2-4ab0-b12e-86f12a9fde57" name="Changes" comment="Added auth controller to process sign-in, sign-out, and register" />
+    <list default="true" id="289f692e-a0f2-4ab0-b12e-86f12a9fde57" name="Changes" comment="Added auth controller to process sign-in, sign-out, and register">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/src/main/resources/SQL/Schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/resources/SQL/Schema.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
