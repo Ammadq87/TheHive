@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    background-color: #F8F8F8;
+}
+
+h1 {
+    color: #6345D5;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    margin: 4px;
+    background-color: white;
+    align-items: center;
+}
+
+a {
+    background-color: transparent;
+}
+
+li {
+    margin: 16px;
+    background-color: white;
+}
+
+button {
+}
