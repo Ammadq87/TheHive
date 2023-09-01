@@ -27,5 +27,7 @@ li {
     background-color: white;
 }
 
-button {
+#searchBar > input {
+    outline: transparent;
+    border: transparent;
 }
