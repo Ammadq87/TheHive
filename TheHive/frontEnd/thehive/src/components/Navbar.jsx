@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '../assets/puzzle.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell } from '@fortawesome/free-solid-svg-icons'
@@ -6,6 +6,15 @@ import SearchBar from './SearchBar';
 
 export default function Navbar() {
     const [signedIn, setSignedIn] = useState(false);
+
+    const handleSignedIn = () => {
+        const User = JSON.parse(sessionStorage.getItem('User'));
+        setSignedIn(User !== null)
+    }
+
+    useEffect(() => {
+        handleSignedIn();
+    })
 
     return (
         <div id="navbar" className='bg-white flex h-16 items-center shadow-sm'>
