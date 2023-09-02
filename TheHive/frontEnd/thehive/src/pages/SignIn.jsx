@@ -1,12 +1,19 @@
 import Navbar from "../components/Navbar";
 import logo from '../assets/puzzle.png'
 import { useEffect, useState } from "react";
+import axios from 'axios';
 
 const inputUI = 'block m-auto my-4 rounded-md w-4/5 border border-gray-200 text-sm h-12'
 
 export default function Login (){
 
     const [formData, setFormData] = useState({email: null, password: null});
+    const [message, setMessage] = useState('');
+    const [messageColor, setMessagecolor] = useState('');
+
+    const database = axios.create({
+        baseURL: 'http://localhost:3000/api/v1'
+    });
 
     const handleFormData = (field, value) => {
         const x = formData;
@@ -14,8 +21,22 @@ export default function Login (){
         setFormData({...x});
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = async (e) => {
+        try {
+            const response = await database.post('/auth/signIn', formData);
+            setMessage(response['data']);
+            setMessagecolor('green');
+
+            const userData = await database.get('/user/');
+            console.log(userData['data']);
+            sessionStorage.setItem("User", JSON.stringify(userData['data']));
+            location.href = '/'
+        } catch (err) {
+            console.log(err);
+            setMessage(`${err['response']['data']}`);
+            setMessagecolor('red');
+        }
+
     }
 
     useEffect(() => {
@@ -25,7 +46,7 @@ export default function Login (){
     return (
         <div>
             <Navbar/>
-            <form action="http://localhost:3000/api/v1/auth/signIn" method="POST" className="block border rounded-md drop-shadow-md w-1/5 m-auto bg-white mt-16">
+            <form className="block border rounded-md drop-shadow-md w-1/5 m-auto bg-white mt-16">
 
                 <div id="logo" className='block justify-center items-center bg-white m-auto mt-4'>
                     <img src={logo} alt="CoCreate Logo" className='w-12 h-12  text-center m-auto'/>
@@ -39,7 +60,7 @@ export default function Login (){
                     onChange={(e) => handleFormData('password', e.target.value)}
                 />
                 
-                <button type="buttom" className="block m-auto bg-purple-700 h-10 text-white my-4 rounded-md w-4/5 font-semibold"
+                <button type="button" className="block m-auto bg-purple-700 h-10 text-white my-4 rounded-md w-4/5 font-semibold"
                     onClick={(e) => handleSubmit(e)}
                 >Sign In</button>
 
@@ -48,6 +69,9 @@ export default function Login (){
                     <a href="/register" className="inline ml-0 text-xs font-semibold mr-auto">Forgot Password?</a>
                     <a href="/register" className="inline mr-0 text-xs font-semibold ml-auto">Register</a>
                 </div>
+
+                <p className={`bg-white text-center text-sm mt-8 mb-4 font-semibold text-${messageColor}-500`}>{message}</p>
+
             </form>
         </div>
     );

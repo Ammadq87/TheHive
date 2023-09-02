@@ -10,6 +10,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping(path="api/v1/user")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
     private final UserService userService;
@@ -19,7 +20,7 @@ public class UserController {
         this.userService = us;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<User> getUser() {
         if (UserSession.getInstance().getUser() == null)
             return null;

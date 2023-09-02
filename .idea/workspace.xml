@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="289f692e-a0f2-4ab0-b12e-86f12a9fde57" name="Changes" comment="Added auth controller to process sign-in, sign-out, and register">
+      <change afterPath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Controller/CorsConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/main.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/SignIn.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/SignIn.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheHive/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,12 +20,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -45,13 +49,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ammad/Desktop/Code/Spring Boot/TheHive&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/ammad/Desktop/Code/Spring Boot/demo/demo/src"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.LoginApp.demo.App" />
@@ -68,6 +72,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.App" />
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
@@ -113,8 +118,24 @@
     <MESSAGE value="Added auth controller to process sign-in, sign-out, and register" />
     <option name="LAST_COMMIT_MESSAGE" value="Added auth controller to process sign-in, sign-out, and register" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Service/AuthService.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Controller/AuthController.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TheHive$App.ic" NAME="App Coverage Results" MODIFIED="1693085783331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/TheHive$App.ic" NAME="App Coverage Results" MODIFIED="1693630721819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.LoginApp.demo.*</FILTER>
     </SUITE>
   </component>
