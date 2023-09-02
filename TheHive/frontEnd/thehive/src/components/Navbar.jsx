@@ -20,7 +20,7 @@ export default function Navbar() {
         <div id="navbar" className='bg-white flex h-16 items-center shadow-sm'>
             <div id="logo" className='flex bg-white m-4'>
                 <img src={logo} alt="CoCreate Logo" className='w-12 h-12'/>
-                <a href="/" className='bg-white'><h1 className='text-2xl font-bold m-2 bg-white'>CoCreate</h1></a>
+                <a href="/" className='bg-white'><h1 className='text-purple-600 text-2xl font-bold m-2 bg-white'>CoCreate</h1></a>
             </div>
 
             <div id="links" className=''>
