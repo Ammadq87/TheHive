@@ -20,7 +20,7 @@ public class AuthController {
         this.authService = as;
     }
 
-    @PostMapping("signOut")
+    @PostMapping("/signOut")
     public ResponseEntity<String> signOut(){
         return authService.signOut();
     }
