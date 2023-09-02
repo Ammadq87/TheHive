@@ -1,17 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '../assets/puzzle.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import SearchBar from './SearchBar';
 
 export default function Navbar() {
-    const [signedIn, setSignedIn] = useState(!false);
+    const [signedIn, setSignedIn] = useState(false);
+
+    const handleSignedIn = () => {
+        const User = JSON.parse(sessionStorage.getItem('User'));
+        setSignedIn(User !== null)
+    }
+
+    useEffect(() => {
+        handleSignedIn();
+    })
 
     return (
         <div id="navbar" className='bg-white flex h-16 items-center shadow-sm'>
             <div id="logo" className='flex bg-white m-4'>
                 <img src={logo} alt="CoCreate Logo" className='w-12 h-12'/>
-                <a href="" className='bg-white'><h1 className='text-2xl font-bold m-2 bg-white'>CoCreate</h1></a>
+                <a href="/" className='bg-white'><h1 className='text-2xl font-bold m-2 bg-white'>CoCreate</h1></a>
             </div>
 
             <div id="links" className=''>
@@ -22,8 +31,6 @@ export default function Navbar() {
                 </ul>
             </div>
            
-            {/* Place the ml-auto class here */}
-
             {
                 signedIn &&
                 <div id='personal' className='flex ml-auto items-center bg-white'>
@@ -37,19 +44,12 @@ export default function Navbar() {
 
             {
                 !signedIn &&
-                <div id='signedOut' className='block border ml-auto'>
+                <div id='signedOut' className='block ml-auto'>
                     <ul>
                         <a href="/SignIn" className='bg-white'><h3 className='mx-8 text-md font-bold m-2 text-purple-700 bg-white'>Sign In</h3></a>
                     </ul>
                 </div>
             }
-
-            {/* <div className="flex w-fit bg-red-600">
-                <SearchBar></SearchBar>
-
-                
-            </div> */}
-
         </div>
     );
 }
