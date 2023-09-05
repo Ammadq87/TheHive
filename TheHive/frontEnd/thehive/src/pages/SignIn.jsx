@@ -45,7 +45,6 @@ export default function Login (){
 
     return (
         <div>
-            <Navbar/>
             <form className="block border rounded-md drop-shadow-md w-1/5 m-auto bg-white mt-16">
 
                 <div id="logo" className='block justify-center items-center bg-white m-auto mt-4'>

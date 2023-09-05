@@ -2,13 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+body {
     background-color: #F8F8F8;
 }
 
-h1 {
-    /* color: #6345D5; */
-}
 
 ul {
     list-style: none;
