@@ -6,7 +6,7 @@ export default function YourSpaces(props) {
     const data = {props};
 
     return (
-        <div id="YourSpaces" className="w-1/6 bg-white rounded-md drop-shadow-sm mt-16 mx-8 block">
+        <div id="YourSpaces" className="min-w-fit w-1/6 h-fit bg-white rounded-md drop-shadow-sm mt-16 mx-8 block">
             <div id="header" className="flex items-center">
                 <h2 className="ml-4 font-bold my-4 text-gray-900">Your Spaces</h2>
                 <a href="/space/new" className="ml-auto mr-4 text-xs font-semibold text-blue-700 border p-2 rounded border-blue-700">Add <FontAwesomeIcon className="" icon={faPlus}/></a>            
