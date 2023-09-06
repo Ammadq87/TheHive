@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faFile, faUserGroup, faPeopleRoof} from '@fortawesome/free-solid-svg-icons';
+import {faFile, faUserGroup, faPeopleRoof, faUser, faBookOpen, faDiagramProject} from '@fortawesome/free-solid-svg-icons';
 import { useActionData } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -9,8 +9,11 @@ export default function NewSpace() {
     const [selected, setSelected] = useState(-1);
 
     const spaces = [
-        {name: 'Blank space', icon: faFile, color: 'text-blue-500', bg: 'bg-none'}, 
-        {name: 'Team space', icon: faUserGroup, color: 'text-teal-500', bg: 'bg-none'}, 
+        {name: 'Personal', icon: faUser, color: 'text-blue-500', bg: 'bg-none'}, 
+        {name: 'Team', icon: faUserGroup, color: 'text-teal-500', bg: 'bg-none'}, 
+        {name: 'Knowledge Base', icon: faBookOpen, color: 'text-yellow-300', bg: 'bg-none'}, 
+        {name: 'Project', icon: faDiagramProject, color: 'text-red-500', bg: 'bg-none'}, 
+        {name: 'Documentation', icon: faFile, color: 'text-black-300', bg: 'bg-none'}, 
         {name: 'Community Engagement', icon: faPeopleRoof, color: 'text-orange-500', bg: 'bg-none'}];
 
     const [spaceCreationForm, setSpaceCreationForm] = useState({
@@ -86,7 +89,7 @@ export default function NewSpace() {
             </div>
         </div>,
         <div id='step2'>
-            <h2 className="font-medium text-gray-800 text-2xl ml-0">Add details to your new {spaces[selected]?.name}.</h2>
+            <h2 className="font-medium text-gray-800 text-2xl ml-0">Add details to your new {spaces[selected]?.name} space.</h2>
             <h4 className="mt-4 font-semibold text-blue-900">Add space details</h4>
 
             <form action="" className='mt-4'>
@@ -124,7 +127,7 @@ export default function NewSpace() {
         if (step === 1) {
             //submit space information to db
 
-            location.href = `/spaces/${spaceCreationForm?.name}`
+            location.href = `/spaces/${spaceCreationForm?.name?.split(' ').join('_')}`
         }
     }
 
