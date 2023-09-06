@@ -1,27 +1,51 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFile, faUserGroup, faPeopleRoof} from '@fortawesome/free-solid-svg-icons';
 import { useActionData } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function NewSpace() {
     
     const [stepNumber, setStepNumber]  = useState(0);
+    const [selected, setSelected] = useState(-1);
 
     const spaces = [
-        {name: 'Blank space', icon: faFile, color: 'text-blue-500', selected: false, bg: 'bg-none'}, 
-        {name: 'Team space', icon: faUserGroup, color: 'text-teal-500', selected: false, bg: 'bg-none'}, 
-        {name: 'Community Engagement', icon: faPeopleRoof, color: 'text-orange-500', selected: false, bg: 'bg-none'}];
-    
+        {name: 'Blank space', icon: faFile, color: 'text-blue-500', bg: 'bg-none'}, 
+        {name: 'Team space', icon: faUserGroup, color: 'text-teal-500', bg: 'bg-none'}, 
+        {name: 'Community Engagement', icon: faPeopleRoof, color: 'text-orange-500', bg: 'bg-none'}];
+
+    const [spaceCreationForm, setSpaceCreationForm] = useState({
+        type: spaces[selected],
+        name: null,
+        teamAccess: []
+    }); 
+
+    const handleSpaceCreation = (field, value) => {
+        const spc = spaceCreationForm;
+        if (field === 'teamAccess') {
+            value = value.split(',');
+            value = value.map(v => {
+                return v.trim();
+            })
+            spc.teamAccess = [...value];
+        } else {
+            spc.name = value;
+        }
+        setSpaceCreationForm({...spc});
+    };
+
+    useEffect(() => {
+        console.log(spaceCreationForm)
+    }, [spaceCreationForm]);
+
     const handleSelection = (opt) => {
-        spaces.forEach((space, i) => {
-            space.bg = 'bg-none';
-            space.selected = false;
-        });
-
-        spaces[opt].selected = !spaces[opt].selected;
-        spaces[opt].bg = 'bg-blue-100';
-
-        console.log(spaces);
+        for (let i=0; i<spaces.length; i++) 
+            document.getElementById('spaceOption'+i).style.backgroundColor = '';
+        document.getElementById('spaceOption'+opt).style.backgroundColor = 'rgb(219 234 254)';
+        setSelected(opt);
+        
+        const spc = spaceCreationForm;
+        spc.type = opt;
+        setSpaceCreationForm({...spc});
     }
 
     const steps = [
@@ -37,11 +61,15 @@ export default function NewSpace() {
                 {
                     spaces.map((option, i) => {
                         return (
-                            <button onClick={() => {handleSelection(i)}} id={`spaceOption${i}`} className={`w-full h-12 flex text-center items-center ${option.bg} hover:bg-blue-100 rounded-sm`} key={i}> 
-                                <FontAwesomeIcon className={`${option.color} w-6 h-6 px-4`} icon={option.icon}/>
-                                <p className='font-semibold text-gray-700'>
-                                {option.name}
-                                </p>
+                            <button 
+                                onClick={() => {handleSelection(i)}} 
+                                id={`spaceOption${i}`} 
+                                className={`w-full h-12 flex text-center items-center ${option.bg} hover:bg-blue-100 rounded-sm`} 
+                                key={i}> 
+                                    <FontAwesomeIcon className={`${option.color} w-6 h-6 px-4`} icon={option.icon}/>
+                                    <p className='font-semibold text-gray-700'>
+                                        {option.name}
+                                    </p>
                             </button>
                         );
                     })
@@ -57,7 +85,19 @@ export default function NewSpace() {
                 </div>
             </div>
         </div>,
-        
+        <div id='step2'>
+            <h2 className="font-medium text-gray-800 text-2xl ml-0">Add details to your new {spaces[selected]?.name}.</h2>
+            <h4 className="mt-4 font-semibold text-blue-900">Add space details</h4>
+
+            <form action="" className='mt-4'>
+                <p className='text-sm text-gray-700 font-medium'>Name <span className='text-red-500'>*</span></p>
+                <input value={spaceCreationForm?.name} onChange={(e) => {handleSpaceCreation('name', e.target.value)}} type="text" required className='rounded-md bg-gray-50 border-2'/>
+
+                <p className='mt-4 text-sm text-gray-700 font-medium'>Team Access <span className='text-xs font-bold'>(Separate by commas)</span></p>
+                <input value={spaceCreationForm?.teamAccess} onChange={(e) => {handleSpaceCreation('teamAccess', e.target.value)}} type="text" className='rounded-md bg-gray-50 border-2' />
+
+            </form>
+        </div>
 
     ]
 
@@ -72,8 +112,20 @@ export default function NewSpace() {
 
     const nextStep = () => {
         const step = stepNumber;
-        if (step <= 1)
+
+        if (step === 0 && selected === -1) {
+            alert("Please select an option before continuing");
+            return;
+        }
+
+        if (step < 1)
             setStepNumber(stepNumber + 1);
+
+        if (step === 1) {
+            //submit space information to db
+
+            location.href = `/spaces/${spaceCreationForm?.name}`
+        }
     }
 
     return (
@@ -84,22 +136,16 @@ export default function NewSpace() {
                 {
                     steps[stepNumber]
                 }
-
                 
                 <div id='steps' className='flex items-center mt-4'>
                     <p className='mr-auto text-xs'>Step {stepNumber + 1} of 2</p>
                     
                     <div id='actions'>
                         <button onClick={() => goBack()} className='text-sm mx-1 px-4 py-1 w-18 text-center rounded-sm bg-gray-100'>{stepNumber === 0 ? 'Cancel' : 'Back'}</button>
-                        <button onClick={() => nextStep()} className='text-sm mx-1 px-4 py-1 w-18 text-center rounded-sm mr-0 bg-blue-600 text-white'>Next</button>
+                        <button onClick={() => nextStep()} className='text-sm mx-1 px-4 py-1 w-18 text-center rounded-sm mr-0 bg-purple-600 text-white'>{stepNumber === 0 ? 'Next' : 'Create Space'}</button>
                     </div>
                 </div>
-
-
             </div>
-
-            
-
         </div>
     );
 }
