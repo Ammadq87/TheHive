@@ -8,7 +8,7 @@ export default function Home() {
             
             <div id='feed' className="mt-16 w-screen h-screen border px-4">
 
-                <h2 className="font-bold border text-gray-900 w- text-2xl">Your Feed</h2>
+                <h2 className="font-bold border text-gray-900 w-full text-2xl">Your Feed</h2>
 
             </div>
 

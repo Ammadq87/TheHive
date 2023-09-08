@@ -44,8 +44,8 @@ export default function Login (){
     }, [formData])
 
     return (
-        <div>
-            <form className="block border rounded-md drop-shadow-md w-1/5 m-auto bg-white mt-16">
+        <div className="flex m-auto w-full items-center">
+            <form className="border rounded-md drop-shadow-md m-auto w-1/6 bg-white mt-16">
 
                 <div id="logo" className='block justify-center items-center bg-white m-auto mt-4'>
                     <img src={logo} alt="CoCreate Logo" className='w-12 h-12  text-center m-auto'/>

@@ -28,7 +28,8 @@ export default function Navbar() {
                 <div id="links" className=''>
                     <ul>
                         <a href='/home'><li>Home</li></a>
-                        <a href='/Spaces'><li>Spaces</li></a> 
+                        <a href='/Spaces'><li>Spaces</li></a>
+                        {/* ToDo: should be a link -- not button */}
                         <button className='m-4 text-12 text-white bg-purple-600 h-8 w-24 rounded-md'>Create</button>
                     </ul>
                 </div>
@@ -48,7 +49,7 @@ export default function Navbar() {
                     !signedIn &&
                     <div id='signedOut' className='block ml-auto'>
                         <ul>
-                            <a href="/SignIn" className='bg-white'><h3 className='mx-8 text-md font-bold m-2 text-purple-700 bg-white'>Sign In</h3></a>
+                            <a href="/signIn" className='bg-white'><h3 className='mx-8 text-md font-bold m-2 text-purple-700 bg-white'>Sign In</h3></a>
                         </ul>
                     </div>
                 }

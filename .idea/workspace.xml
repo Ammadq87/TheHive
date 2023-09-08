@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="289f692e-a0f2-4ab0-b12e-86f12a9fde57" name="Changes" comment="Added auth controller to process sign-in, sign-out, and register">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/components/Navbar.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/components/YourSpaces.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/components/YourSpaces.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Home.jsx" afterDir="false" />
     </list>
