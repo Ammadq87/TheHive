@@ -11,10 +11,8 @@ export default function NewSpace() {
     const spaces = [
         {name: 'Personal', icon: faUser, color: 'text-blue-500', bg: 'bg-none'}, 
         {name: 'Team', icon: faUserGroup, color: 'text-teal-500', bg: 'bg-none'}, 
-        {name: 'Knowledge Base', icon: faBookOpen, color: 'text-yellow-300', bg: 'bg-none'}, 
         {name: 'Project', icon: faDiagramProject, color: 'text-red-500', bg: 'bg-none'}, 
-        {name: 'Documentation', icon: faFile, color: 'text-black-300', bg: 'bg-none'}, 
-        {name: 'Community Engagement', icon: faPeopleRoof, color: 'text-orange-500', bg: 'bg-none'}];
+    ];
 
     const [spaceCreationForm, setSpaceCreationForm] = useState({
         type: spaces[selected],
@@ -96,9 +94,14 @@ export default function NewSpace() {
                 <p className='text-sm text-gray-700 font-medium'>Name <span className='text-red-500'>*</span></p>
                 <input value={spaceCreationForm?.name} onChange={(e) => {handleSpaceCreation('name', e.target.value)}} type="text" required className='rounded-md bg-gray-50 border-2'/>
 
-                <p className='mt-4 text-sm text-gray-700 font-medium'>Team Access <span className='text-xs font-bold'>(Separate by commas)</span></p>
-                <input value={spaceCreationForm?.teamAccess} onChange={(e) => {handleSpaceCreation('teamAccess', e.target.value)}} type="text" className='rounded-md bg-gray-50 border-2' />
-
+                {
+                    spaces[selected]?.name !== 'Personal' &&
+                    <div>
+                        <p className='mt-4 text-sm text-gray-700 font-medium'>Team Access <span className='text-xs font-bold'>(Separate by commas)</span></p>
+                        <input value={spaceCreationForm?.teamAccess} onChange={(e) => {handleSpaceCreation('teamAccess', e.target.value)}} type="text" className='rounded-md bg-gray-50 border-2' />
+                    </div>
+                    
+                }
             </form>
         </div>
 
@@ -125,8 +128,13 @@ export default function NewSpace() {
             setStepNumber(stepNumber + 1);
 
         if (step === 1) {
+            //validate if name is not empty
+            if (!spaceCreationForm['name']) {
+                alert("Please enter a name for your space");
+                return;
+            }
+            
             //submit space information to db
-
             location.href = `/spaces/${spaceCreationForm?.name?.split(' ').join('_')}`
         }
     }
@@ -145,7 +153,7 @@ export default function NewSpace() {
                     
                     <div id='actions'>
                         <button onClick={() => goBack()} className='text-sm mx-1 px-4 py-1 w-18 text-center rounded-sm bg-gray-100'>{stepNumber === 0 ? 'Cancel' : 'Back'}</button>
-                        <button onClick={() => nextStep()} className='text-sm mx-1 px-4 py-1 w-18 text-center rounded-sm mr-0 bg-purple-600 text-white'>{stepNumber === 0 ? 'Next' : 'Create Space'}</button>
+                        <button type='submit' onClick={() => nextStep()} className='text-sm mx-1 px-4 py-1 w-18 text-center rounded-sm mr-0 bg-purple-600 text-white'>{stepNumber === 0 ? 'Next' : 'Create Space'}</button>
                     </div>
                 </div>
             </div>
