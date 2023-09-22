@@ -9,7 +9,7 @@ export default function Home() {
     const User = JSON.parse(sessionStorage.getItem('User'));
 
     useEffect(() => {
-        setShowHomePage(!User ? true: false);
+        setShowHomePage(User ? true: false);
     }, []);
 
     return (
