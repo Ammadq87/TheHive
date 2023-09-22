@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: #F8F8F8;
+}
+
+
+ul {
+    list-style: none;
+    display: flex;
+    margin: 4px;
+    background-color: white;
+    align-items: center;
+}
+
+a {
+    background-color: transparent;
+}
+
+li {
+    margin: 16px;
+    background-color: white;
+}
+
+#searchBar > input {
+    outline: transparent;
+    border: transparent;
+}
