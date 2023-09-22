@@ -7,8 +7,6 @@ import Profile from './pages/Profile'
 import Create from './pages/Create'
 import Spaces from './pages/Spaces/Spaces'
 import Navbar from './components/Navbar';
-import SideBar from './components/SideBar';
-import YourSpaces from './components/YourSpaces';
 import NewSpace from './pages/Spaces/NewSpace';
 
 // https://dribbble.com/shots/17159089-DoWhith-Personal-Wallet-Dashboard
@@ -25,8 +23,11 @@ function App() {
             <Route path='/signIn' element={<SignIn/>}/>
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/create' element={<Create/>}/>
-            <Route path='/spaces' element={<Spaces/>}/>   
-            <Route path='/spaces/new' element={<NewSpace/>}/>          
+
+            <Route path='/spaces/'>
+              <Route path='new' element={<NewSpace/>}/>
+              <Route path=':spaceId' element={<Spaces/>}/>
+            </Route>
           </Routes>
         </Router>
       </div>

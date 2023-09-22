@@ -8,6 +8,7 @@ export default function NewSpace() {
     const [stepNumber, setStepNumber]  = useState(0);
     const [selected, setSelected] = useState(-1);
 
+    const selections = ['Overview', 'Blog', 'Members', 'Pages', 'Plan'];
     const spaces = [
         {name: 'Personal', icon: faUser, color: 'text-blue-500', bg: 'bg-none'}, 
         {name: 'Team', icon: faUserGroup, color: 'text-teal-500', bg: 'bg-none'}, 
@@ -100,8 +101,21 @@ export default function NewSpace() {
                         <p className='mt-4 text-sm text-gray-700 font-medium'>Team Access <span className='text-xs font-bold'>(Separate by commas)</span></p>
                         <input value={spaceCreationForm?.teamAccess} onChange={(e) => {handleSpaceCreation('teamAccess', e.target.value)}} type="text" className='rounded-md bg-gray-50 border-2' />
                     </div>
-                    
                 }
+
+                <p className='mt-4 text-sm text-gray-700 font-medium'>Add-Ons:</p>
+                <div id='selections'>
+                    {
+                        selections.map((item, i) => {
+                            return (
+                                <div key={i} className='flex items-center'>
+                                    <input type="checkbox" className='mr-2'/>
+                                    <p>{item}</p>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
             </form>
         </div>
 
