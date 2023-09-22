@@ -25,12 +25,12 @@ export default function Navbar() {
                     <a href="/" className='bg-white'><h1 className='text-purple-600 text-2xl font-bold m-2 bg-white'>CoCreate</h1></a>
                 </div>
 
-                <div id="links" className=''>
+                <div id="links" className='items-center'>
                     <ul>
                         <a href='/home'><li>Home</li></a>
                         <a href='/Spaces'><li>Spaces</li></a>
                         {/* ToDo: should be a link -- not button */}
-                        <button className='m-4 text-12 text-white bg-purple-600 h-8 w-24 rounded-md'>Create</button>
+                        <a className='text-white font-semibold h-10 w-24 border text-center pt-2 rounded-md bg-purple-700' href='/create'>Create</a>
                     </ul>
                 </div>
             
