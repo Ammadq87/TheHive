@@ -30,6 +30,7 @@ function App() {
             <Route path='/create' element={<Create />} />
 
             <Route path='/teams' element={<Teams/>}/>
+            <Route path='/teams/new' element={<NewTeam/>}/>
             <Route path='/teams/addMember' element={<AddMember />} />
 
             <Route path='/spaces' element={<Spaces />}>
