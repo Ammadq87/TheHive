@@ -18,7 +18,7 @@ export default function Navbar() {
 
     return (
 
-        <div id='navbar' className='block w-screen'>
+        <div id='navbar' className='block w-screen shadow-sm z-50 relative'>
             <div className='bg-white flex h-16 items-center '>
                 <div id="logo" className='flex bg-white m-4'>
                     <img src={logo} alt="CoCreate Logo" className='w-12 h-12'/>
@@ -28,7 +28,8 @@ export default function Navbar() {
                 <div id="links" className='items-center'>
                     <ul>
                         <a href='/home'><li>Home</li></a>
-                        <a href='/Spaces'><li>Spaces</li></a>
+                        <a href='/spaces'><li>Spaces</li></a>
+                        <a href='/team'><li>My Team</li></a>
                         {/* ToDo: should be a link -- not button */}
                         <a className='text-white font-semibold h-10 w-24 border text-center pt-2 rounded-md bg-purple-700' href='/create'>Create</a>
                     </ul>

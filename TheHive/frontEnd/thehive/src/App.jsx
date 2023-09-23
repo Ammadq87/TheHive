@@ -7,8 +7,6 @@ import Profile from './pages/Profile'
 import Create from './pages/Create'
 import Spaces from './pages/Spaces/Spaces'
 import Navbar from './components/Navbar';
-import SideBar from './components/SideBar';
-import YourSpaces from './components/YourSpaces';
 import NewSpace from './pages/Spaces/NewSpace';
 import Register from './pages/Register';
 import Teams from './pages/Team/Teams';
@@ -33,10 +31,10 @@ function App() {
             <Route path='/teams/new' element={<NewTeam/>}/>
             <Route path='/teams/addMember' element={<AddMember />} />
 
-            <Route path='/spaces' element={<Spaces />}>
-              <Route path='new' element={<NewSpace />} />
+            <Route path='/spaces/'>
+              <Route path='new' element={<NewSpace/>}/>
+              <Route path=':spaceId' element={<Spaces/>}/>
             </Route>
-
           </Routes>
         </Router>
       </div>

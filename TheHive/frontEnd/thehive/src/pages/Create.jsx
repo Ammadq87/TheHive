@@ -45,7 +45,7 @@ export default function Create() {
 }
 
 /**
- * Creates an item card for an item with the given information
+ * Creates an item card for an item with the given information.
  * @param {Object} name 
  */
 const itemCard = (item) => {
