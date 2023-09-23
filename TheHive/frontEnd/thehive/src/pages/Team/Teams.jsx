@@ -30,7 +30,7 @@ export default function Teams() {
     
                 <h3 className="font-semibold text-xl mt-4">Members</h3>
                 <h2>Manager(s): </h2>
-                <h2>Players: </h2>
+                <h2>Employees: </h2>
                 <button onClick={() => {addNewTeamMember()}} className="mt-2 px-4 border bg-blue-500 text-white border-blue-500 font-bold p-1 text-sm rounded-md">Add a Member</button>
             </div>
         )

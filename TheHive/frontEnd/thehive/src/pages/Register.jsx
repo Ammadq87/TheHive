@@ -95,10 +95,6 @@ export default function Register (){
 
     }
 
-    const submitForm = async () => {
-        
-    }
-
     return (
         <div className="flex m-auto w-full items-center">
             <form className="border rounded-md drop-shadow-md m-auto w-1/3 bg-white mt-16">
