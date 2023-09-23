@@ -11,6 +11,8 @@ import SideBar from './components/SideBar';
 import YourSpaces from './components/YourSpaces';
 import NewSpace from './pages/Spaces/NewSpace';
 import Register from './pages/Register';
+import Teams from './pages/Teams/Teams';
+import NewTeam from './pages/Teams/NewTeam';
 
 // https://dribbble.com/shots/17159089-DoWhith-Personal-Wallet-Dashboard
 
@@ -27,8 +29,16 @@ function App() {
             <Route path='/register' element={<Register/>}/>
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/create' element={<Create/>}/>
-            <Route path='/spaces' element={<Spaces/>}/>   
-            <Route path='/spaces/new' element={<NewSpace/>}/>          
+            <Route path='/teams' element={<Teams />}>
+              <Route path='new' element={<NewTeam />} />
+              {/* <Route path=':id' element={<SpaceDetail />} /> */}
+            </Route>      
+
+            <Route path='/spaces' element={<Spaces />}>
+              <Route path='new' element={<NewSpace />} />
+              {/* <Route path=':id' element={<SpaceDetail />} /> */}
+            </Route>      
+
           </Routes>
         </Router>
       </div>
