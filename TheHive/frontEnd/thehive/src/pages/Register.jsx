@@ -7,7 +7,7 @@ const inputUI = 'flex m-auto my-4 rounded-md w-4/5  text-sm h-12'
 const form = {
     first_name: null, 
     last_name: null,
-    organization: null,
+    organization_id: null,
     email: null, 
     password: null,
     confirm_password: null 
@@ -41,7 +41,7 @@ export default function Register (){
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         const registerForm = formData;
         
         console.log(registerForm)
@@ -73,6 +73,30 @@ export default function Register (){
             register to db
         */
 
+        try {
+            const newForm = {
+                userID: null,
+                firstName: formData.first_name,
+                lastName: formData.last_name,
+                organizationID: formData.organization_id,
+                email: formData.email,
+                password: formData.password
+            }
+
+            const response = await database.post('/auth/register', newForm);
+            setMessage(response['data']);
+            setMessagecolor('green');
+
+        } catch (e) {
+            console.log(e);
+            setMessage(e.response.data);
+            setMessagecolor('red');
+        }
+
+    }
+
+    const submitForm = async () => {
+        
     }
 
     return (

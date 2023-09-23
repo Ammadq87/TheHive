@@ -1,5 +1,6 @@
 package com.LoginApp.demo.Service;
 
+import com.LoginApp.demo.Model.Organization;
 import com.LoginApp.demo.Model.User;
 import com.LoginApp.demo.Model.UserSession;
 import com.LoginApp.demo.Repository.AuthRepository;
@@ -8,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
 
 @Component
 public class AuthService {
@@ -29,7 +32,6 @@ public class AuthService {
     }
 
     public ResponseEntity<String> register(User u) {
-
         if (UserSession.getInstance().getUser() != null)
             return new ResponseEntity<>("Sign Out to Register", HttpStatus.BAD_REQUEST);
 
@@ -39,6 +41,13 @@ public class AuthService {
         boolean exists = authRepository.existsByEmail(u.getEmail()).isPresent();
         if (exists)
             return new ResponseEntity<>("Email already taken", HttpStatus.PRECONDITION_FAILED);
+
+        Optional<Organization> organization = authRepository.orgnizationExists(u.getOrganizationID());
+        if (organization.isEmpty()) {
+            return new ResponseEntity<>("Not a Valid OrgID", HttpStatus.PRECONDITION_FAILED);
+        }
+
+        u.setUserID(generateUID(u));
 
         authRepository.save(u);
         return new ResponseEntity<>("Successfully Registered", HttpStatus.OK);
@@ -52,6 +61,19 @@ public class AuthService {
         UserSession.getInstance().setUser(u.get());
         System.out.println(UserSession.getInstance().getUser().getEmail() + " is logged in.");
         return new ResponseEntity<>("Successgully Logged In", HttpStatus.OK);
+    }
+
+    // Private/Helper methods
+    private Long generateUID(User u) {
+        String uid = "";
+        do {
+            for (int i = 5; i >= 0; i--) {
+                int x = new Random().nextInt(10);
+                uid += x;
+            }
+        } while (!authRepository.countByOrganizationID(u.getOrganizationID(), Long.parseLong(uid)).equals(0L));
+
+        return Long.parseLong(uid);
     }
 
 }

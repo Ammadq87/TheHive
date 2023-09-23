@@ -79,7 +79,14 @@ public class User {
         this.lastName = lastName;
     }
 
-    @Override
+    public Long getOrganizationID() {
+        return organizationID;
+    }
+
+    public void setOrganizationID(Long organizationID) {
+        this.organizationID = organizationID;
+    }
+
     public String toString() {
         return "User{" +
                 "user_id=" + userID +
