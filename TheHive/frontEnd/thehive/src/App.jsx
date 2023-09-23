@@ -29,10 +29,8 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/create' element={<Create />} />
 
-            <Route path='/teams' element={<Teams/>}>
-              <Route path='new' element={<NewTeam />} />
-              <Route path='addMember' element={<AddMember />} />
-            </Route>
+            <Route path='/teams' element={<Teams/>}/>
+            <Route path='/teams/addMember' element={<AddMember />} />
 
             <Route path='/spaces' element={<Spaces />}>
               <Route path='new' element={<NewSpace />} />

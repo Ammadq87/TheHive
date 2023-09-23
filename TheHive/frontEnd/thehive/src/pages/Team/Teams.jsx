@@ -42,7 +42,7 @@ export default function Teams() {
         if (!!User?.permission.team.member) {
             alert('Oops! It seems like you don\'t have the permission to add a new member.')
         } else {
-            location.href += '/addMember';
+            location.href = '/teams/addMember';
         }
     }
     //#endregion
