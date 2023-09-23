@@ -10,6 +10,7 @@ import Navbar from './components/Navbar';
 import SideBar from './components/SideBar';
 import YourSpaces from './components/YourSpaces';
 import NewSpace from './pages/Spaces/NewSpace';
+import Register from './pages/Register';
 
 // https://dribbble.com/shots/17159089-DoWhith-Personal-Wallet-Dashboard
 
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home/>}/>
             <Route path='/signIn' element={<SignIn/>}/>
+            <Route path='/register' element={<Register/>}/>
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/create' element={<Create/>}/>
             <Route path='/spaces' element={<Spaces/>}/>   
