@@ -2,6 +2,16 @@ import { useEffect, useState } from "react";
 import SearchBar from "../../components/SearchBar";
 
 export default function Teams() {
+
+    const User = JSON.parse(localStorage.getItem('User'));
+    if (!User) {
+        return (
+            <div className="m-auto w-1/2  text-center mt-80">
+                <h2 className="font-bold ">Please <a href="/signIn" className="text-blue-700 underline italic">sign-in</a> to join, create, and view teams 🌐</h2>
+            </div>
+        )
+    }
+
     const teamData = {};
 
     const [teamSectionBtnColor, setTeamSectionBtnColor] = useState('YourTeam');

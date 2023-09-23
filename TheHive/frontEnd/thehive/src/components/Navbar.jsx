@@ -29,7 +29,7 @@ export default function Navbar() {
                     <ul>
                         <a href='/home'><li>Home</li></a>
                         <a href='/spaces'><li>Spaces</li></a>
-                        <a href='/team'><li>My Team</li></a>
+                        <a href='/teams'><li>My Team</li></a>
                         {/* ToDo: should be a link -- not button */}
                         <a className='text-white font-semibold h-10 w-24 border text-center pt-2 rounded-md bg-purple-700' href='/create'>Create</a>
                     </ul>
