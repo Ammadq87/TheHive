@@ -51,7 +51,7 @@ export default function Create() {
 const itemCard = (item) => {
 
     return (
-        <a className={`bg-white m-4 p-2 rounded-md shadow-sm w-1/${items.length} min-h-52 text-center overflow-hidden`} href={item.link}>
+        <a className={`bg-white m-4 ml-0 p-2 rounded-md shadow-sm w-1/${items.length} min-h-52 text-center overflow-hidden`} href={item.link}>
             <h1 className='font-bold text-2xl text-center mt-2'>{item.name}</h1>
             <FontAwesomeIcon className={`${item.color} text-3xl my-2`} icon={item.icon}/>
             <h3 className='text-left px-4'>{item.description}</h3>

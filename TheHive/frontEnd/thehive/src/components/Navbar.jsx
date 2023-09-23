@@ -38,7 +38,7 @@ export default function Navbar() {
                 {
                     signedIn &&
                     <div id='personal' className='flex ml-auto items-center bg-white mr-4'>
-                        <SearchBar/>
+                        <SearchBar placeholder={'Search for posts, documents, people, etc'}/>
                         <ul className=''>
                             <a href="" className='m-4'><FontAwesomeIcon icon={faBell}/></a>
                             <button><img className='w-8 h-8 rounded-full mx-4' src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="" /></button>
