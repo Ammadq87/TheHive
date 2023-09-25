@@ -28,13 +28,17 @@ public class User {
     @JsonProperty("organizationID")
     private Long organizationID;
 
-    public User(Long userID, String email, String password, String firstName, String lastName, Long organizationID) {
+    @Column(nullable = true, name="teamID")
+    private Long teamID;
+
+    public User(Long userID, String email, String password, String firstName, String lastName, Long organizationID, Long teamID) {
         this.userID = userID;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.organizationID = organizationID;
+        this.teamID = teamID;
     }
 
     public User(){}
@@ -85,6 +89,14 @@ public class User {
 
     public void setOrganizationID(Long organizationID) {
         this.organizationID = organizationID;
+    }
+
+    public Long getTeamID() {
+        return teamID;
+    }
+
+    public void setTeamID(Long teamID) {
+        this.teamID = teamID;
     }
 
     public String toString() {

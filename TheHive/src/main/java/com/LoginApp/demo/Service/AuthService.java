@@ -67,6 +67,7 @@ public class AuthService {
     private Long generateUID(User u) {
         String uid = "";
         do {
+            uid = "";
             for (int i = 5; i >= 0; i--) {
                 int x = new Random().nextInt(10);
                 uid += x;

@@ -3,7 +3,8 @@ import SearchBar from "../../components/SearchBar";
 
 export default function Teams() {
 
-    const User = JSON.parse(localStorage.getItem('User'));
+    const User = JSON.parse(sessionStorage.getItem('User'));
+    console.log(User);
     if (!User) {
         return (
             <div className="m-auto w-1/2  text-center mt-80">
@@ -12,7 +13,7 @@ export default function Teams() {
         )
     }
 
-    const teamData = {};
+    const teamData = null;
 
     const [teamSectionBtnColor, setTeamSectionBtnColor] = useState('YourTeam');
 
@@ -30,20 +31,32 @@ export default function Teams() {
     }
     
     const GenerateYourTeam = (data) => {
-        return (
-            <div className='block mt-4'>
-                <h2 className="font-bold  text-gray-900 w-full text-3xl">HR1</h2>
-                <hr />
-                
-                <h3 className="font-semibold text-xl mt-4">Description</h3>
-                <p className="text-sm">This is the team description :))</p>
-    
-                <h3 className="font-semibold text-xl mt-4">Members</h3>
-                <h2>Manager(s): </h2>
-                <h2>Employees: </h2>
-                <button onClick={() => {addNewTeamMember()}} className="mt-2 px-4 border bg-blue-500 text-white border-blue-500 font-bold p-1 text-sm rounded-md">Add a Member</button>
-            </div>
-        )
+        if (data == null) {
+            return (
+                <div className='block mt-4'>
+                    <h3 className="font-semibold text-xl mt-4">Uh-oh!</h3>
+                    <p className="text-sm">Seems like you are not part of a team. Ask your manager to add you to their team or enter your one-time team code <a href="/teams/new" className="font-bold italic underline text-blue-500">here</a>.</p>
+                </div>
+            )
+        }
+        
+        else {
+            return (
+                <div className='block mt-4'>
+                    <h2 className="font-bold  text-gray-900 w-full text-3xl">HR1</h2>
+                    <hr />
+                    
+                    <h3 className="font-semibold text-xl mt-4">Description</h3>
+                    <p className="text-sm">This is the team description :))</p>
+        
+                    <h3 className="font-semibold text-xl mt-4">Members</h3>
+                    <h2>Manager(s): </h2>
+                    <h2>Employees: </h2>
+                    <button onClick={() => {addNewTeamMember()}} className="mt-2 px-4 border bg-blue-500 text-white border-blue-500 font-bold p-1 text-sm rounded-md">Add a Member</button>
+                </div>
+            )
+        }
+        
     }
     
     const addNewTeamMember = () => {
@@ -80,7 +93,7 @@ export default function Teams() {
                         && GenerateYourTeam(teamData)
                     }
 
-{
+                    {
                         teamSectionBtnColor !== 'YourTeam'
                         && GenerateOtherTeams()
                     }
