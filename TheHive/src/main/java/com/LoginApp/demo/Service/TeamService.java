@@ -1,9 +1,9 @@
 package com.LoginApp.demo.Service;
 import com.LoginApp.demo.Model.Team;
+import com.LoginApp.demo.Model.TeamDTO;
 import com.LoginApp.demo.Model.User;
 import com.LoginApp.demo.Model.UserSession;
 import com.LoginApp.demo.Repository.TeamRepo;
-import com.LoginApp.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,21 +20,23 @@ public class TeamService {
         this.teamRepo = tr;
     }
 
-    public ResponseEntity<String> createNewTeam(Team team) {
+    public ResponseEntity<String> createNewTeam(TeamDTO team) {
         if (team == null)
             return new ResponseEntity<>(null, HttpStatus.PRECONDITION_FAILED);
         Long orgID = UserSession.getInstance().getUser().getOrganizationID();
-        Long count = teamRepo.verifyTeamName(team.getName(), orgID);
+        Long count = teamRepo.verifyTeamName(team.getTeam_name(), orgID);
         if (count > 0L) {
             return new ResponseEntity<>("Team name already exists within organization", HttpStatus.PRECONDITION_FAILED);
         }
 
-        Optional<List<String>> result = teamRepo.findUserDetailsByEmailList(team.getMembers());
+        Optional<List<String>> result = teamRepo.findUserDetailsByEmailList(team.getNames());
         if (result.isEmpty())
             return new ResponseEntity<>("Could not find members", HttpStatus.PRECONDITION_FAILED);
 
-        Set<String> inputSet = new HashSet<>(team.getMembers());
+        Set<String> inputSet = new HashSet<>(team.getNames());
         Set<String> resultSet = new HashSet<>(result.get());
+
+        // Have to check if a member exists in a current team -- if they do, throw error
 
         inputSet.removeAll(resultSet);
         if (inputSet.size() != 0) {
@@ -45,7 +47,7 @@ public class TeamService {
 
         Team newTeam = new Team();
         newTeam.setOrganizationID(UserSession.getInstance().getUser().getOrganizationID());
-        newTeam.setName(team.getName());
+        newTeam.setName(team.getTeam_name());
         newTeam.setDescription(team.getDescription());
 
         Long teamID = generateTeamID();
@@ -62,6 +64,29 @@ public class TeamService {
         UserSession.getInstance().getUser().setTeamID(teamID);
         return new ResponseEntity<>(newTeam.getName() + " created!", HttpStatus.OK);
     }
+
+    public ResponseEntity<Team> getTeam (Long tid) {
+        Long oid = UserSession.getInstance().getUser().getOrganizationID();
+        if (oid == null) {
+            return new ResponseEntity<>(null, HttpStatus.PRECONDITION_FAILED);
+        }
+
+        Optional<Team> repoTeam = teamRepo.getTeam(tid, oid);
+        if (repoTeam.isEmpty()) {
+            return new ResponseEntity<>(null, HttpStatus.PRECONDITION_FAILED);
+        }
+
+        Team team = repoTeam.get();
+
+        Optional<ArrayList<User>> members = teamRepo.getMembers(tid, oid);
+        if (members.isEmpty())
+            team.setMembers(new ArrayList<>());
+        else
+            team.setMembers(members.get());
+
+        return new ResponseEntity<>(repoTeam.get(), HttpStatus.OK);
+    }
+
 
     // private/helper functions
 

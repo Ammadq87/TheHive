@@ -1,11 +1,9 @@
 package com.LoginApp.demo.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 @Entity
 public class Team {
@@ -15,11 +13,13 @@ public class Team {
     @Column(name = "organizationID")
     private Long organizationID;
     @Column(name = "name")
-    @JsonProperty("team_name")
     private String name;
 
     @Column(name = "description")
     private String description;
+
+    @Transient
+    private ArrayList<User> members;
 
     public Team() {
 
@@ -56,20 +56,20 @@ public class Team {
         this.name = name;
     }
 
-    public ArrayList<String> getMembers() {
-        return members;
-    }
-
-    public void setMembers(ArrayList<String> members) {
-        this.members = members;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ArrayList<User> getMembers() {
+        return members;
+    }
+
+    public void setMembers(ArrayList<User> members) {
+        this.members = members;
     }
 
     @Override

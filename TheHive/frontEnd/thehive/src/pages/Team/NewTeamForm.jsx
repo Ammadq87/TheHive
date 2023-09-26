@@ -6,7 +6,7 @@ import axios from "axios";
 const form = {
     team_name: null,
     description: null,
-    members: []
+    names: []
 };
 
 export default function NewTeamForm() {
@@ -23,7 +23,7 @@ export default function NewTeamForm() {
     const handleFormData = (field, value) => {
         const x = formData;
 
-        if (field === 'members') {
+        if (field === 'names') {
             let val = value.split(' ').join('').split(',');
             x[field] = [];
             val.forEach(e => {

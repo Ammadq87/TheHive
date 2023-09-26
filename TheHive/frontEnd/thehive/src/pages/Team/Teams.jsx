@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import SearchBar from "../../components/SearchBar";
+import axios from "axios";
+import TeamsModel from "./TeamsModel";
+import MiniMemberDisplay from "../../components/MiniMemberDisplay";
 
 export default function Teams() {
 
     const User = JSON.parse(sessionStorage.getItem('User'));
-    console.log(User);
+    const [teamData, setTeamData] = useState(null);
+
     if (!User) {
         return (
             <div className="m-auto w-1/2  text-center mt-80">
@@ -13,13 +17,25 @@ export default function Teams() {
         )
     }
 
-    const teamData = null;
-
     const [teamSectionBtnColor, setTeamSectionBtnColor] = useState('YourTeam');
 
+
+
+    //#region API/Database Calls
+    async function fetchData() {
+        try {
+            const data = await TeamsModel.getTeamData();
+            console.log(data);
+            setTeamData(data); // Update teamData using state
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
-        console.log('Fetch Team Data Here');
+        fetchData();
     }, []);
+    //#endregion
 
     //#region Create components
     const GenerateOtherTeams = () => {
@@ -43,15 +59,22 @@ export default function Teams() {
         else {
             return (
                 <div className='block mt-4'>
-                    <h2 className="font-bold  text-gray-900 w-full text-3xl">HR1</h2>
+                    <h2 className="font-bold  text-gray-900 w-full text-3xl">{data?.team_name}</h2>
                     <hr />
                     
                     <h3 className="font-semibold text-xl mt-4">Description</h3>
-                    <p className="text-sm">This is the team description :))</p>
+                    <p className="text-sm">{data?.description}</p>
         
                     <h3 className="font-semibold text-xl mt-4">Members</h3>
                     <h2>Manager(s): </h2>
                     <h2>Employees: </h2>
+                    <div className="flex">
+                        {
+                            data?.members?.map((m, i) => {
+                                return <MiniMemberDisplay name={teamData?.name} data={m} key={i}/>
+                            })
+                        }
+                    </div>
                     <button onClick={() => {addNewTeamMember()}} className="mt-2 px-4 border bg-blue-500 text-white border-blue-500 font-bold p-1 text-sm rounded-md">Add a Member</button>
                 </div>
             )

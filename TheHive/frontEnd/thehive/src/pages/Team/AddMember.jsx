@@ -47,7 +47,6 @@ const GenerateEmployeeExists = () => {
     return (
         <div className="mt-4">
             <SearchBar placeholder='Search by email'/>
-            <MiniMemberDisplay/>
         </div>
     )
 }
