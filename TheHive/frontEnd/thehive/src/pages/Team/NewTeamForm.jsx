@@ -72,14 +72,17 @@ export default function NewTeamForm() {
                 - if missing member
                     - display modal to show which members weren't added
             */
-            
+            const res = e['response']['data'];
+            let emails = res.split('$$');
+            const message = `Could not add these members: ${emails[0]}.\n\nAdded these members: ${emails[1]}.`;
             console.log(e);
-            alert('Something went wrong when creating your team :(')
+            alert(message);
+
         }
     }
   
     return (
-        <form action="" className="border w-1/3 p-2 rounded-sm shadow-sm">
+        <div action="" className="border w-1/3 p-2 rounded-sm shadow-sm">
             {
                 Object.keys(form).map((field, i) => {
                     return (
@@ -104,6 +107,6 @@ export default function NewTeamForm() {
                 })
             }
             <button onClick={() => {submitForm()}} className="px-4 py-2 rounded-md bg-green-500 text-center text-white w-1/4 text-md flex ml-auto mx-2">Create Team</button>
-        </form>
+        </div>
     )
 }

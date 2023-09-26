@@ -60,7 +60,7 @@ public class AuthService {
 
         UserSession.getInstance().setUser(u.get());
         System.out.println(UserSession.getInstance().getUser().getEmail() + " is logged in.");
-        return new ResponseEntity<>("Successgully Logged In", HttpStatus.OK);
+        return new ResponseEntity<>("Successfully Logged In", HttpStatus.OK);
     }
 
     // Private/Helper methods

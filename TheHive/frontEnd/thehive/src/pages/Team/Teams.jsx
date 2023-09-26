@@ -19,8 +19,6 @@ export default function Teams() {
 
     const [teamSectionBtnColor, setTeamSectionBtnColor] = useState('YourTeam');
 
-
-
     //#region API/Database Calls
     async function fetchData() {
         try {
