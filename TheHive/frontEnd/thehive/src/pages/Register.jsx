@@ -32,15 +32,6 @@ export default function Register (){
         setFormData({...x});
     }
 
-    const generateAsterikUI = (field) => {
-        const x = formData;
-        if (formData[field] !== null) {
-            return `mr-2 text-white`;
-        } else {
-            return `text-red-700 mr-2`;
-        }
-    }
-
     const handleSubmit = async (e) => {
         const registerForm = formData;
         
@@ -71,6 +62,7 @@ export default function Register (){
             Check if organization exists
                 do not register if organization DNE
             register to db
+            run query to put default permissions
         */
 
         try {

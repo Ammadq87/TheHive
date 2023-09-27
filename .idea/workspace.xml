@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="289f692e-a0f2-4ab0-b12e-86f12a9fde57" name="Changes" comment="Added auth controller to process sign-in, sign-out, and register">
-      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/AddMember.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/AddMember.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/Teams.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/Teams.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/src/main/resources/SQL/Schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/resources/SQL/Schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -49,7 +49,8 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ammad/Desktop/Code/Spring Boot/demo/demo/src&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ammad/Desktop/Code/Spring Boot/demo/demo/src&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
   <component name="RunManager">

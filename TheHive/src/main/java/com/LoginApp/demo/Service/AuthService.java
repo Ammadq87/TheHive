@@ -60,13 +60,14 @@ public class AuthService {
 
         UserSession.getInstance().setUser(u.get());
         System.out.println(UserSession.getInstance().getUser().getEmail() + " is logged in.");
-        return new ResponseEntity<>("Successgully Logged In", HttpStatus.OK);
+        return new ResponseEntity<>("Successfully Logged In", HttpStatus.OK);
     }
 
     // Private/Helper methods
     private Long generateUID(User u) {
         String uid = "";
         do {
+            uid = "";
             for (int i = 5; i >= 0; i--) {
                 int x = new Random().nextInt(10);
                 uid += x;

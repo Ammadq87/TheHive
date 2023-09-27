@@ -16,6 +16,11 @@ export default function Navbar() {
         handleSignedIn();
     })
 
+    const tempSignOut = () => {
+        sessionStorage.removeItem("User");
+        location.href = '/';
+    }
+
     return (
 
         <div id='navbar' className='block w-screen shadow-sm z-50 relative'>
@@ -41,7 +46,7 @@ export default function Navbar() {
                         <SearchBar placeholder={'Search for posts, documents, people, etc'}/>
                         <ul className=''>
                             <a href="" className='m-4'><FontAwesomeIcon icon={faBell}/></a>
-                            <button><img className='w-8 h-8 rounded-full mx-4' src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="" /></button>
+                            <button onClick={() => {tempSignOut()}}><img className='w-8 h-8 rounded-full mx-4' src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="" /></button>
                         </ul>
                     </div>
                 }
