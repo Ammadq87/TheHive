@@ -1,4 +1,4 @@
--- DROP SCHEMA TheHive;
+DROP SCHEMA TheHive;
 
 CREATE SCHEMA TheHive;
 
@@ -10,15 +10,26 @@ CREATE TABLE Organization (
     PRIMARY KEY (organizationID)
 );
 
+-- xxx (3 random digits for org) yyyyyyyyy(9 random digits for user)
 INSERT INTO Organization VALUES 
-(1, 'Nestle');
+(100, 'Nestle');
 
-CREATE TABLE space (
+CREATE TABLE Space (
 	spaceID BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     organizationID BIGINT NOT NULL,
     PRIMARY KEY (spaceID),
     FOREIGN KEY (organizationID) REFERENCES Organization(organizationID)
+);
+
+CREATE TABLE Team (
+	teamID BIGINT NOT NULL,
+    organizationID BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(1000) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    PRIMARY KEY (teamID),
+	FOREIGN KEY (organizationID) REFERENCES Organization(organizationID)
 );
 
 CREATE TABLE User (
@@ -28,8 +39,17 @@ CREATE TABLE User (
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255),
     organizationID BIGINT NOT NULL,
+    teamID BIGINT DEFAULT -1,
+    role VARCHAR(255),
+    description VARCHAR(255),
+    isManager TINYINT DEFAULT 0,
+    CanCreate TINYINT DEFAULT 0,
+    CanUpdate TINYINT DEFAULT 0,
+    CanRead TINYINT DEFAULT 1,
+    CanDelete TINYINT DEFAULT 0,
     PRIMARY KEY (userID),
-    FOREIGN KEY (organizationID) REFERENCES Organization(organizationID)
+    FOREIGN KEY (organizationID) REFERENCES Organization(organizationID),
+	FOREIGN KEY (teamID) REFERENCES Team(teamID)
 );
 
 CREATE TABLE AdminsInspace (
@@ -87,3 +107,4 @@ CREATE TABLE Permissions (
     FOREIGN KEY (pageID) REFERENCES Page(pageID),
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
+
