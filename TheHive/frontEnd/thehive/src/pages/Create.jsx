@@ -37,11 +37,11 @@ export default function Create() {
         <div id='Create'>
             <div id='feed' className="mt-8 w-11/12 m-auto h-screen ">
                 <h2 className="font-bold  text-gray-900 w-full text-3xl">Create</h2>
-                <div className='flex overflow-auto'>
+                <div id='item' className='mt-4 grid grid-cols-3 gap-4'>
                     {
                         items.map((item, i) => {
                             return (
-                                itemCard(item)
+                                itemCard(item, i)
                             )
                         })
                     }    
@@ -55,14 +55,12 @@ export default function Create() {
  * Creates an item card for an item with the given information.
  * @param {Object} name 
  */
-const itemCard = (item) => {
-
+const itemCard = (item, i) => {
     return (
-        <a className={`bg-white m-4 ml-0 p-2 rounded-md shadow-sm w-1/3 min-h-52 text-center overflow-hidden`} href={item.link}>
+        <a className="bg-white p-4 rounded-md shadow-sm text-center overflow-hidden" href={item.link} key={i}>
             <h1 className='font-bold text-2xl text-center mt-2'>{item.name}</h1>
             <FontAwesomeIcon className={`${item.color} text-3xl my-2`} icon={item.icon}/>
             <h3 className='text-left px-4'>{item.description}</h3>
         </a>
     )
-
 }

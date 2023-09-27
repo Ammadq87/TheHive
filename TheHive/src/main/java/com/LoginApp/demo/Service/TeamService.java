@@ -31,7 +31,7 @@ public class TeamService {
 
         Optional<List<String>> result = teamRepo.findUserDetailsByEmailList(team.getNames());
         if (result.isEmpty())
-            return new ResponseEntity<>("Could not find members", HttpStatus.PRECONDITION_FAILED);
+            return new ResponseEntity<>("Could not find any members", HttpStatus.PRECONDITION_FAILED);
 
         Set<String> inputSet = new HashSet<>(team.getNames());
         Set<String> resultSet = new HashSet<>(result.get());
@@ -42,7 +42,7 @@ public class TeamService {
         if (inputSet.size() != 0) {
             List<String> remainingMembers = new ArrayList<>(inputSet);
             // [members who couldn't be added]$$[added members] -- to display in modal
-            return new ResponseEntity<>(remainingMembers.toString() + "$$" + resultSet.toString(), HttpStatus.PRECONDITION_FAILED);
+            return new ResponseEntity<>("These members don't exist or are already a part of a team:\n"+formatRemainingMembers(remainingMembers), HttpStatus.PRECONDITION_FAILED);
         }
 
         Team newTeam = new Team();
@@ -62,7 +62,7 @@ public class TeamService {
         }
 
         UserSession.getInstance().getUser().setTeamID(teamID);
-        return new ResponseEntity<>(newTeam.getName() + " created!", HttpStatus.OK);
+        return new ResponseEntity<>("Success, your new team, "+newTeam.getName()+", has been created. Go to MyTeams and view your newly created team.$$"+newTeam.getTeamID(), HttpStatus.OK);
     }
 
     public ResponseEntity<Team> getTeam (Long tid) {
@@ -89,6 +89,16 @@ public class TeamService {
 
 
     // private/helper functions
+
+    private String formatRemainingMembers(List<String> members) {
+        String output = "\n";
+        if (members == null || members.size() == 0)
+            return output;
+        for (String m : members) {
+            output += m+", ";
+        }
+        return output.substring(0, output.length()-2);
+    }
 
     private Long generateTeamID() {
         String tid = "";

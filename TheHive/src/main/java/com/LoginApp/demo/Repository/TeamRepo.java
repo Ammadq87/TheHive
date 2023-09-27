@@ -15,7 +15,7 @@ public interface TeamRepo extends JpaRepository<Team, Long> {
     @Query("SELECT COUNT(t) FROM Team t WHERE t.name = :name AND t.organizationID = :id")
     Long verifyTeamName(@Param("name") String name, @Param("id") Long id);
 
-    @Query("SELECT u.email FROM User u INNER JOIN Organization o ON u.organizationID = o.organizationID WHERE u.email IN :members")
+    @Query("SELECT u.email FROM User u INNER JOIN Organization o ON u.organizationID = o.organizationID WHERE u.email IN :members AND u.teamID IS NULL")
     Optional<List<String>> findUserDetailsByEmailList(@Param("members") List<String> members);
 
     @Query("SELECT COUNT(t) FROM Team t WHERE t.teamID = :id AND t.organizationID = :oid")

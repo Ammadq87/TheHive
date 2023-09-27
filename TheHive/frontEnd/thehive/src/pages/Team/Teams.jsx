@@ -57,7 +57,7 @@ export default function Teams() {
         else {
             return (
                 <div className='block mt-4'>
-                    <h2 className="font-bold  text-gray-900 w-full text-3xl">{data?.team_name}</h2>
+                    <h2 className="font-bold  text-gray-900 w-full text-3xl">{data?.name}</h2>
                     <hr />
                     
                     <h3 className="font-semibold text-xl mt-4">Description</h3>

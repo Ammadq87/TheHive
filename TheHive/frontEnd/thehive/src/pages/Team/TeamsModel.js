@@ -12,11 +12,12 @@ export default class TeamsModel {
      */
     static async getTeamData() {
         const User = JSON.parse(sessionStorage.getItem('User'));
-
         if (!('teamID' in User))
             return null;
 
         const teamID = User['teamID'];
+        if (teamID === null)
+            return null;
 
         try {
             const response = await this.database.get(`/team/${teamID}`);
