@@ -1,14 +1,12 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import SearchBar from "../../components/SearchBar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import MiniMemberDisplay from "../../components/MiniMemberDisplay";
+import PageSearchBar from "../../components/PageSearchBar";
 
 export default function AddMember() {
     const [employeeExists, setEmployeeExists] = useState(true);
-
-
-
     return (
         <div id='AddMember'>
             <div className="mt-8 w-11/12 m-auto h-screen ">
@@ -44,12 +42,35 @@ export default function AddMember() {
 }
 
 const GenerateEmployeeExists = () => {
+    const [members, setMembers] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const handleDataFromSearch = (data) => {
+        setMembers(data);
+    }
+
+    useEffect(() => {
+        setLoading(false); // Reset loading state when members change
+    }, [members]);
+
     return (
         <div className="mt-4">
-            <SearchBar placeholder='Search by email'/>
+            {/* <PageSearchBar receiveData={handleDataFromSearch} placeholder='Search by email' searchType="user"/> */}
+            <SearchBar receiveData={handleDataFromSearch} placeholder='Search by email' search_type={['user']} main_search={false}/>
+
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
+                <div className="grid grid-cols-4 gap-4">
+                    {members.map((m, i) => (
+                        <MiniMemberDisplay data={m} key={i} showEmail={true}/>
+                    ))}
+                </div>
+            )}
         </div>
     )
 }
+
 
 const GenerateNewEmployee = () => {
     return (

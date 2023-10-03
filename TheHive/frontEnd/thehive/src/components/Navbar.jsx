@@ -12,6 +12,10 @@ export default function Navbar() {
         setSignedIn(User !== null)
     }
 
+    const handleDataFromSearch = (data) => {
+        console.log(data);
+    }
+
     useEffect(() => {
         handleSignedIn();
     })
@@ -43,7 +47,7 @@ export default function Navbar() {
                 {
                     signedIn &&
                     <div id='personal' className='flex ml-auto items-center bg-white mr-4'>
-                        <SearchBar placeholder={'Search for posts, documents, people, etc'}/>
+                        <SearchBar placeholder='Search for posts, documents, people, etc' search_type={['user', 'team', 'space', 'page']} main_search={true} receiveData={handleDataFromSearch}/>
                         <ul className=''>
                             <a href="" className='m-4'><FontAwesomeIcon icon={faBell}/></a>
                             <button onClick={() => {tempSignOut()}}><img className='w-8 h-8 rounded-full mx-4' src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" alt="" /></button>

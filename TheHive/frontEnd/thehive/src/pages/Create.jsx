@@ -5,7 +5,7 @@ const items = [
     {
         name: 'Teams',
         icon: faPeopleGroup,
-        description: 'Create a dedicated team for like-minded individuals to collaborate and work on future projects together.',
+        description: 'Join or create a dedicated team for like-minded individuals to collaborate and work on future projects together.',
         color: 'text-blue-500',
         link: 'teams/new'
     },

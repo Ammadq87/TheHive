@@ -3,6 +3,8 @@ import SearchBar from "../../components/SearchBar";
 import axios from "axios";
 import TeamsModel from "./TeamsModel";
 import MiniMemberDisplay from "../../components/MiniMemberDisplay";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 export default function Teams() {
 
@@ -57,7 +59,15 @@ export default function Teams() {
         else {
             return (
                 <div className='block mt-4'>
-                    <h2 className="font-bold  text-gray-900 w-full text-3xl">{data?.name}</h2>
+                    <div id="header" className="flex w-full items-center">
+                        <h2 className="font-bold  text-gray-900 w-fit text-3xl">{data?.name}</h2>
+                        {
+                            User?.canUpdate &&
+                            <a href="/teams/edit">
+                                <FontAwesomeIcon className="ml-4 text-gray-400" icon={faEdit}/>
+                            </a>
+                        }
+                    </div>
                     <hr />
                     
                     <h3 className="font-semibold text-xl mt-4">Description</h3>
@@ -65,11 +75,22 @@ export default function Teams() {
         
                     <h3 className="font-semibold text-xl mt-4">Members</h3>
                     <h2>Manager(s): </h2>
+                    {
+                        data?.members.map((m, i) => {
+                            return (
+                                m.userID === data.managerID &&
+                                <MiniMemberDisplay name={teamData?.name} data={m} key={i}/>
+                            )
+                        })
+                    }
                     <h2>Employees: </h2>
                     <div className="flex">
                         {
                             data?.members?.map((m, i) => {
-                                return <MiniMemberDisplay name={teamData?.name} data={m} key={i}/>
+                                return (
+                                    m.userID !== data.managerID &&
+                                    <MiniMemberDisplay name={teamData?.name} data={m} key={i}/>
+                                )
                             })
                         }
                     </div>
@@ -82,8 +103,8 @@ export default function Teams() {
     
     const addNewTeamMember = () => {
         // Get user permissions and check for permission
-        const User = JSON.parse(localStorage.getItem('User'));
-        if (!!User?.permission.team.member) {
+        const User = JSON.parse(sessionStorage.getItem('User'));
+        if (!User?.canCreate) {
             alert('Oops! It seems like you don\'t have the permission to add a new member.')
         } else {
             location.href = '/teams/addMember';
