@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -32,6 +33,13 @@ public class UserService {
         Optional<ArrayList<User>> users = userRepository.getUsersFromOrganization(id);
         if (users.isEmpty())
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+        return new ResponseEntity<>(users.get(), HttpStatus.OK);
+    }
+
+    public ResponseEntity<ArrayList<User>> getUsersByEmail(String email) {
+        Optional<ArrayList<User>> users = userRepository.getUsersByEmail(UserSession.getInstance().getUser().getOrganizationID(), email);
+        if (users.isEmpty())
+             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         return new ResponseEntity<>(users.get(), HttpStatus.OK);
     }
 

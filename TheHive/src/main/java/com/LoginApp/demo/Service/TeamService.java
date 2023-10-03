@@ -53,9 +53,14 @@ public class TeamService {
         Long teamID = generateTeamID();
         newTeam.setTeamID(teamID);
 
+        newTeam.setManagerID(UserSession.getInstance().getUser().getUserID());
+
         try {
             teamRepo.save(newTeam);
             teamRepo.updateUserTeamId(newTeam.getTeamID(), newTeam.getOrganizationID(), new ArrayList<>(resultSet));
+            teamRepo.updateUserManager(newTeam.getTeamID(), UserSession.getInstance().getUser().getOrganizationID(), UserSession.getInstance().getUser().getUserID());
+            UserSession.getInstance().getUser().setManager(true);
+            UserSession.getInstance().getUser().setCanCreate(true);
         } catch (Exception e) {
             System.out.println("Something went wrong saving the team");
             e.printStackTrace();

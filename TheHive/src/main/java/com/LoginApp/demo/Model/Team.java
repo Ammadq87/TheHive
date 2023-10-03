@@ -1,6 +1,5 @@
 package com.LoginApp.demo.Model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.*;
@@ -18,6 +17,12 @@ public class Team {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "Location", nullable = true)
+    private String location = "Canada";
+
+    @Column(name = "managerID")
+    private Long managerID;
+
     @Transient
     private ArrayList<User> members;
 
@@ -25,11 +30,13 @@ public class Team {
 
     }
 
-    public Team(Long teamID, Long organizationID, String name, String description) {
+    public Team(Long teamID, Long organizationID, String name, String description, String location, Long managerID) {
         this.teamID = teamID;
         this.organizationID = organizationID;
         this.name = name;
         this.description = description;
+        this.location = location;
+        this.managerID = managerID;
     }
 
     public Long getTeamID() {
@@ -72,12 +79,31 @@ public class Team {
         this.members = members;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Long getManagerID() {
+        return managerID;
+    }
+
+    public void setManagerID(Long managerID) {
+        this.managerID = managerID;
+    }
+
     @Override
     public String toString() {
         return "Team{" +
                 "teamID=" + teamID +
                 ", organizationID=" + organizationID +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", members=" + members +
                 '}';
     }
 }

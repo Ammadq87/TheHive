@@ -6,6 +6,14 @@ import NewTeamForm from "./NewTeamForm";
 export default function NewTeam(props) {
     const data = {props};
     const noInitialTeam = data.noInitialTeam;
+    const User = JSON.parse(sessionStorage.getItem('User'));
+    if (!User) {
+        return (
+            <div className="m-auto w-1/2  text-center mt-80">
+                <h2 className="font-bold ">Please <a href="/signIn" className="text-blue-700 underline italic">sign-in</a> to join or create a team 🧰</h2>
+            </div>
+        )
+    }
 
     const [joinTeamBtn, setJoinTeamBtn] = useState(noInitialTeam);
     return (
@@ -26,7 +34,7 @@ export default function NewTeam(props) {
 
                     {
                         joinTeamBtn
-                        && GenerateNewTeam()
+                        && GenerateNewTeam(User)
                     }
 
                     {
@@ -45,7 +53,17 @@ export default function NewTeam(props) {
 /*
  * Check for permissions first -- default permissions are always false
  */
-const GenerateNewTeam = () => {
+const GenerateNewTeam = (User) => {
+
+    if (!User?.canCreate) {
+        return (
+            <div className="mt-4">
+                <h2 className="font-bold  text-gray-900 w-full text-xl">Oops!</h2>
+                <p className="my-2 justify-between text-sm">You don't have access to create new teams. Please discuss with your manager to grant access.</p>
+            </div>
+        )
+    }
+
     return (
         <div className="mt-4">
             <h2 className="font-bold  text-gray-900 w-full text-xl">New Team</h2>

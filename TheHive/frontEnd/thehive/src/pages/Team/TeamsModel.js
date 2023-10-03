@@ -7,6 +7,19 @@ export default class TeamsModel {
     });;
 
     /**
+     * @param {{team_name,description,location,names}} form
+     * @returns {Response} response
+     */
+    static async createNewTeam (form) {
+        try {
+            const response = await database.post('/team/createNewTeam', form);
+            return response;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
      * Retrieves team data based on User's teamID.
      * @returns {Response} response
      */

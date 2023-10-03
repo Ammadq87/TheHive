@@ -70,7 +70,7 @@ public class AuthService {
             uid = "";
             for (int i = 5; i >= 0; i--) {
                 int x = new Random().nextInt(10);
-                uid += x;
+                uid += ""+x;
             }
         } while (!authRepository.countByOrganizationID(u.getOrganizationID(), Long.parseLong(uid)).equals(0L));
 

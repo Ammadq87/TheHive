@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPeopleLine} from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
+import TeamsModel from "./TeamsModel";
 
 const formMessage = {
     title: null,
@@ -12,6 +13,7 @@ const formMessage = {
 const form = {
     team_name: null,
     description: null,
+    location: null,
     names: []
 };
 
@@ -49,14 +51,12 @@ export default function NewTeamForm() {
      */
     const submitForm = async () => {
         try {
-            const response = await database.post('/team/createNewTeam', formData);
+            const response = await TeamsModel.createNewTeam(formData)
             createFormMsg(response);
             setNewTeamID(response);
-
         } catch (e) {
             console.log(e);
             createFormMsg(e);
-
         }
     }
 
