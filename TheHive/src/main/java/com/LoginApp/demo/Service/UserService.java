@@ -1,5 +1,6 @@
 package com.LoginApp.demo.Service;
 
+import com.LoginApp.demo.DTO.UserDTO;
 import com.LoginApp.demo.Model.User;
 import com.LoginApp.demo.Model.UserSession;
 import com.LoginApp.demo.Repository.UserRepository;
@@ -22,8 +23,8 @@ public class UserService {
         this.userRepository = u;
     }
 
-    public ResponseEntity<User> getUser(Long id) {
-        Optional<User> user = userRepository.getUser(id);
+    public ResponseEntity<UserDTO> getUser(Long id) {
+        Optional<UserDTO> user = userRepository.getUser(id, UserSession.getInstance().getUser().getOrganizationID());
         if (user.isEmpty())
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(user.get(), HttpStatus.OK);

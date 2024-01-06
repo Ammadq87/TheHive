@@ -15,8 +15,11 @@ public interface TeamRepo extends JpaRepository<Team, Long> {
     @Query("SELECT COUNT(t) FROM Team t WHERE t.name = :name AND t.organizationID = :id")
     Long verifyTeamName(@Param("name") String name, @Param("id") Long id);
 
-    @Query("SELECT u.email FROM User u INNER JOIN Organization o ON u.organizationID = o.organizationID WHERE u.email IN :members AND u.teamID IS NULL")
+    @Query("SELECT u.email FROM User u INNER JOIN Organization o ON u.organizationID = o.organizationID WHERE u.email IN :members")
     Optional<List<String>> findUserDetailsByEmailList(@Param("members") List<String> members);
+
+    @Query("SELECT u.userID FROM User u INNER JOIN Organization o ON u.organizationID = o.organizationID WHERE u.email IN :members")
+    Optional<List<Long>> getUserIDsByEmailList(@Param("members") List<String> members);
 
     @Query("SELECT COUNT(t) FROM Team t WHERE t.teamID = :id AND t.organizationID = :oid")
     Long isUniqueTeamID(@Param("id") Long id, @Param("oid") Long oid);
@@ -26,10 +29,10 @@ public interface TeamRepo extends JpaRepository<Team, Long> {
     @Query("UPDATE User u SET u.teamID = :teamId, u.CanCreate = False WHERE u.organizationID = :oid AND u.email IN :emailList")
     void updateUserTeamId(@Param("teamId") Long teamId, @Param("oid") Long oid, @Param("emailList") List<String> emailList);
 
-    @Modifying
-    @Transactional
-    @Query("UPDATE User u SET u.isManager = True, u.CanCreate = True, u.CanRead = True, u.CanUpdate = True, u.CanDelete = True, u.teamID = :tid WHERE u.organizationID = :oid AND u.userID = :uid")
-    void updateUserManager(@Param("tid") Long tid, @Param("oid") Long oid, @Param("uid") Long uid);
+//    @Modifying
+//    @Transactional
+//    @Query("UPDATE User u SET u.isManager = True, u.CanCreate = True, u.CanRead = True, u.CanUpdate = True, u.CanDelete = True, u.teamID = :tid WHERE u.organizationID = :oid AND u.userID = :uid")
+//    void updateUserManager(@Param("tid") Long tid, @Param("oid") Long oid, @Param("uid") Long uid);
 
     @Query("SELECT t FROM Team t WHERE t.teamID = :tid AND t.organizationID = :oid")
     Optional<Team> getTeam(@Param("tid") Long tid, @Param("oid") Long oid);

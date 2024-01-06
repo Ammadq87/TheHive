@@ -1,5 +1,6 @@
 package com.LoginApp.demo.Controller;
 
+import com.LoginApp.demo.DTO.UserDTO;
 import com.LoginApp.demo.Model.User;
 import com.LoginApp.demo.Model.UserSession;
 import com.LoginApp.demo.Service.UserService;
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<User> getUser() {
+    public ResponseEntity<UserDTO> getUser() {
         if (UserSession.getInstance().getUser() == null)
             return null;
         return userService.getUser(UserSession.getInstance().getUser().getUserID());

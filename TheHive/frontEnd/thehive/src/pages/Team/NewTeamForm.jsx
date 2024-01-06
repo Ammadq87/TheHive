@@ -51,11 +51,20 @@ export default function NewTeamForm() {
      */
     const submitForm = async () => {
         try {
+
+            if (sessionStorage.getItem('User').teamID) {
+                const x = formMessage;
+                x.title = 'Oops!';
+                x.description = `${data}`;
+                x.color = 'red-500';
+                setFormMessage({...x});
+            }
+
             const response = await TeamsModel.createNewTeam(formData)
             createFormMsg(response);
             setNewTeamID(response);
         } catch (e) {
-            console.log(e);
+            // console.log(e);
             createFormMsg(e);
         }
     }
@@ -65,6 +74,11 @@ export default function NewTeamForm() {
      * @param {Response} response
      */
     const setNewTeamID = (response) => {
+        if (!response) {
+            console.error('[Error] : Could not set teamID for logged in User');
+            return;
+        }
+
         const teamID = parseInt(response['data'].split('$$')[1]);
         const User = JSON.parse(sessionStorage.getItem('User'));
         User.teamID = parseInt(teamID);
@@ -78,21 +92,30 @@ export default function NewTeamForm() {
      * @param {Response} msg
      */
     const createFormMsg = (msg) => {
-        if ('response' in msg) {
-            const data = msg['response']['data'];
-            const x = formMessage;
-            x.title = 'Oops!';
-            x.description = `${data}`;
-            x.color = 'red-500';
-            setFormMessage({...x});
+
+        const x = formMessage;
+
+        if (msg !== undefined) {
+
+            if ('response' in msg) {
+                const data = msg['response']['data'];
+                x.title = 'Oops!';
+                x.description = `${data}`;
+                x.color = 'red-500';
+            } else {
+                const data = msg['data']?.split("$$")[0];
+                x.title = 'Yayy!';
+                x.description = `${data}`;
+                x.color = 'green-500';
+            }
+
         } else {
-            const data = msg['data'].split("$$")[0];
-            const x = formMessage;
-            x.title = 'Yayy!';
-            x.description = `${data}`;
-            x.color = 'green-500';
-            setFormMessage({...x});
+            x.title = 'Oops!';
+            x.description = `Error : Something went wrong creating the team`;
+            x.color = 'red-500';
         }
+
+        setFormMessage({...x});
     }
 
     return (
@@ -100,31 +123,30 @@ export default function NewTeamForm() {
         <div id="parent" className="flex">
             <div id="leftHalf" className="border flex w-1/3 p-2 rounded-sm shadow-sm">
                 <div className="w-full">
-                    {
-                        Object.keys(form).map((field, i) => {
-                            return (
-                                <div className="flex items-center my-4 w-full" key={i}>
-                                    <p className={`font-semibold text-sm mx-2 w-1/3`}><span className="text-red-500">*</span>
-                                    {field.split('_').map((f) => {return f.charAt(0).toUpperCase() + f.substring(1,f.length)}).join(' ')}:</p>
-                                    
-                                    {
-                                        field !== 'team_name' && 
-                                        <textarea rows="1" className="rounded-md border border-gray-200 text-sm h-10 w-full overflow-visible"
-                                        onChange={(e) => {handleFormData(field, e.target.value)}}
-                                        placeholder={field === 'names' ? 'Separate emails by commas' : 'Nice and simple description'}
-                                        ></textarea>
-                                    }
-
-                                    {
-                                        field === 'team_name' && 
-                                        <input type="text" required className={`rounded-md border border-gray-200 text-sm h-10 w-full overflow-visible`}
-                                        onChange={(e) => {handleFormData('team_name', e.target.value)}} placeholder="✨ This represents your team ✨"
-                                        />
-                                    }
-                                </div>
-                            )
-                        })
-                    }
+                    <div className="flex items-center my-4 w-full">
+                        <p className={`font-semibold text-sm mx-2 w-1/3`}><span className="text-red-500">*</span>Team Name:</p>
+                        <input type="text" required className={`rounded-md border border-gray-200 text-sm h-10 w-full overflow-visible`}
+                        onChange={(e) => {handleFormData('team_name', e.target.value)}} placeholder="✨ This represents your team ✨"/>
+                    </div>
+                    <div className="flex items-center my-4 w-full">
+                        <p className={`font-semibold text-sm mx-2 w-1/3`}><span className="text-red-500">*</span>Description</p>
+                        <textarea rows="1" className="rounded-md border border-gray-200 text-sm h-10 w-full overflow-visible"
+                        onChange={(e) => {handleFormData('description', e.target.value)}}
+                        placeholder='Nice and simple description'
+                        ></textarea>
+                    </div>
+                    <div className="flex items-center my-4 w-full">
+                        <p className={`font-semibold text-sm mx-2 w-1/3`}><span className="text-red-500">*</span>Location</p>
+                        <input type="text" required className={`rounded-md border border-gray-200 text-sm h-10 w-full overflow-visible`}
+                        onChange={(e) => {handleFormData('location', e.target.value)}} placeholder="The Team's HQ 😎"/>
+                    </div>
+                    <div className="flex items-center my-4 w-full">
+                        <p className={`font-semibold text-sm mx-2 w-1/3`}><span className="text-red-500">*</span>Members</p>
+                        <textarea rows="1" className="rounded-md border border-gray-200 text-sm h-10 w-full overflow-visible"
+                        onChange={(e) => {handleFormData('names', e.target.value)}}
+                        placeholder='Separate emails by commas => ,'
+                        ></textarea>
+                    </div>
                     <button onClick={() => {submitForm()}} className="px-4 py-2 rounded-md bg-green-500 text-center text-white w-1/4 text-md flex ml-auto mx-2">Create Team</button>
                 </div>
             </div>

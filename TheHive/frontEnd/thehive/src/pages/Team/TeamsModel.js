@@ -11,12 +11,8 @@ export default class TeamsModel {
      * @returns {Response} response
      */
     static async createNewTeam (form) {
-        try {
-            const response = await database.post('/team/createNewTeam', form);
-            return response;
-        } catch (e) {
-            console.log(e);
-        }
+        const response = await this.database.post('/team/createNewTeam', form);
+        return response;
     }
 
     /**

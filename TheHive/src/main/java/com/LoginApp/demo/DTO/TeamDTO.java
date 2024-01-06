@@ -1,5 +1,6 @@
-package com.LoginApp.demo.Model;
+package com.LoginApp.demo.DTO;
 
+import com.LoginApp.demo.Model.User;
 import jakarta.persistence.Transient;
 
 import java.util.*;

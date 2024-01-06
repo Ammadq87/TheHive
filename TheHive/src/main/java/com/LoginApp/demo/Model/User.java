@@ -37,8 +37,8 @@ public class User {
     @Column(nullable = true, name = "description")
     private String description;
 
-    @Column(name = "isManager")
-    private Boolean isManager = false;
+    @Column(name = "managerID")
+    private Long managerID;
 
     @Column(name = "CanCreate")
     private Boolean CanCreate = true;
@@ -52,7 +52,7 @@ public class User {
     @Column(name = "CanDelete")
     private Boolean CanDelete = false;
 
-    public User(Long userID, String email, String password, String firstName, String lastName, Long organizationID, Long teamID, String role, String description, Boolean isManager, Boolean canCreate, Boolean canRead, Boolean canUpdate, Boolean canDelete) {
+    public User(Long userID, String email, String password, String firstName, String lastName, Long organizationID, Long teamID, String role, String description, Long managerID, Boolean canCreate, Boolean canRead, Boolean canUpdate, Boolean canDelete) {
         this.userID = userID;
         this.email = email;
         this.password = password;
@@ -62,7 +62,7 @@ public class User {
         this.teamID = teamID;
         this.role = role;
         this.description = description;
-        this.isManager = isManager;
+        this.managerID = managerID;
         CanCreate = canCreate;
         CanRead = canRead;
         CanUpdate = canUpdate;
@@ -153,12 +153,12 @@ public class User {
         this.description = description;
     }
 
-    public Boolean getManager() {
-        return isManager;
+    public Long getManagerID() {
+        return managerID;
     }
 
-    public void setManager(Boolean manager) {
-        isManager = manager;
+    public void setManagerID(Long manager) {
+        managerID = manager;
     }
 
     public Boolean getCanCreate() {
@@ -205,7 +205,7 @@ public class User {
                 ", teamID=" + teamID +
                 ", role='" + role + '\'' +
                 ", description='" + description + '\'' +
-                ", isManager=" + isManager +
+                ", isManager=" + managerID +
                 ", CanCreate=" + CanCreate +
                 ", CanRead=" + CanRead +
                 ", CanUpdate=" + CanUpdate +
