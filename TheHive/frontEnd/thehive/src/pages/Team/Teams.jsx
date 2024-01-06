@@ -49,7 +49,7 @@ export default function Teams() {
     }
     
     const GenerateYourTeam = (data) => {
-        if (data === undefined) {
+        if (!data) {
             return (
                 <div className='block mt-4'>
                     <h3 className="font-semibold text-xl mt-4">Uh-oh!</h3>

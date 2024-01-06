@@ -67,7 +67,8 @@ const GenerateNewTeam = (User) => {
     return (
         <div className="mt-4">
             <h2 className="font-bold  text-gray-900 w-full text-xl">New Team</h2>
-            <p className="my-2 justify-between text-sm">If you're starting a new project or initiative and need a team, you can create one from scratch. Click below to get started. You can choose a team name, set its purpose, and invite others to join.</p>
+            <p className="my-2 justify-between text-sm">If you're starting a new project or initiative and need a team, you can create one from scratch. Click below to get started. You can choose a team name, set its purpose, and invite others to join. When adding members, add all emails. In the team settings, you can select which member would be the manager.</p>
+            <p className="my-2 justify-between text-sm"><span className="font-bold">Note: </span>adding your email will make you the manager of the new team</p>
             <NewTeamForm/>
         </div>
     )

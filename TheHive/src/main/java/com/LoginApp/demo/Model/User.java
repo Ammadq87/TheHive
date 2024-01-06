@@ -193,6 +193,13 @@ public class User {
         CanDelete = canDelete;
     }
 
+    public void setCRUDpermissions(Boolean cp, Boolean rp, Boolean up, Boolean dp) {
+        setCanCreate(cp);
+        setCanRead(rp);
+        setCanUpdate(up);
+        setCanDelete(dp);
+    }
+
     @Override
     public String toString() {
         return "User{" +
