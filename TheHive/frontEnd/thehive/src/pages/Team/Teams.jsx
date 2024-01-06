@@ -41,13 +41,15 @@ export default function Teams() {
     const GenerateOtherTeams = () => {
         return (
             <div className="block mt-4">
-                <SearchBar placeholder={'Search for teams company-wide'}/>
+                {/* Redux needed */}
+                {/* <SearchBar placeholder={'Search for teams company-wide'}/> */}
+                <p>**Coming Soon**: Search for teams company-wide</p>
             </div>
         )
     }
     
     const GenerateYourTeam = (data) => {
-        if (data == null) {
+        if (data === undefined) {
             return (
                 <div className='block mt-4'>
                     <h3 className="font-semibold text-xl mt-4">Uh-oh!</h3>

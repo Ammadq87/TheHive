@@ -1,5 +1,6 @@
 package com.LoginApp.demo.Repository;
 
+import com.LoginApp.demo.DTO.UserDTO;
 import com.LoginApp.demo.Model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,9 +19,18 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.email = :email AND u.password = :password")
     Optional<User> validateLogin(String email, String password);
 
-    @Query("SELECT u FROM User u JOIN Organization o ON u.organizationID = o.organizationID WHERE u.userID = :id")
-    Optional<User> getUser(Long id);
-
+    @Query("SELECT new com.LoginApp.demo.DTO.UserDTO(" +
+            "u.userID, u.email, u.password, u.firstName, u.lastName, u.role, " +
+            "u.description, u.CanCreate, u.CanRead, u.CanUpdate, u.CanDelete, " +
+            "o.organizationID, o.name AS organizationName, " +
+            "t.teamID, t.name AS teamName, " +
+            "m.userID AS managerID, CONCAT(m.firstName, ' ', m.lastName) AS managerName, m.email AS managerEmail) " +
+            "FROM User u " +
+            "INNER JOIN Organization o ON o.organizationID = u.organizationID " +
+            "LEFT JOIN Team t ON t.teamID = u.teamID AND u.teamID IS NOT NULL " +
+            "LEFT JOIN User m ON m.userID = t.managerID " +
+            "WHERE u.userID = :userId AND o.organizationID = :organizationId")
+    Optional<UserDTO> getUser(@Param("userId") Long userId, @Param("organizationId") Long organizationId);
     @Query("SELECT u FROM User u JOIN Organization o ON u.organizationID = o.organizationID WHERE o.organizationID = :id")
     Optional<ArrayList<User>> getUsersFromOrganization(Long id);
 

@@ -1,8 +1,9 @@
 package com.LoginApp.demo.Service;
 import com.LoginApp.demo.Model.Team;
-import com.LoginApp.demo.Model.TeamDTO;
+import com.LoginApp.demo.DTO.TeamDTO;
 import com.LoginApp.demo.Model.User;
 import com.LoginApp.demo.Model.UserSession;
+import com.LoginApp.demo.Model.UsersInTeam;
 import com.LoginApp.demo.Repository.TeamRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,14 +53,13 @@ public class TeamService {
 
         Long teamID = generateTeamID();
         newTeam.setTeamID(teamID);
-
         newTeam.setManagerID(UserSession.getInstance().getUser().getUserID());
 
         try {
             teamRepo.save(newTeam);
             teamRepo.updateUserTeamId(newTeam.getTeamID(), newTeam.getOrganizationID(), new ArrayList<>(resultSet));
-            teamRepo.updateUserManager(newTeam.getTeamID(), UserSession.getInstance().getUser().getOrganizationID(), UserSession.getInstance().getUser().getUserID());
-            UserSession.getInstance().getUser().setManager(true);
+//            teamRepo.updateUserManager(newTeam.getTeamID(), UserSession.getInstance().getUser().getOrganizationID(), UserSession.getInstance().getUser().getUserID());
+//            UserSession.getInstance().getUser().setManager(true);
             UserSession.getInstance().getUser().setCanCreate(true);
         } catch (Exception e) {
             System.out.println("Something went wrong saving the team");
