@@ -1,8 +1,11 @@
 # Stories, Tasks, and Bug Fixes
 
-### Note
+### Notes
 
 - Spaces > Pages > Documents
+- Definition of Done:
+  - FE and BE are complete with all CRUD functionality
+  - Components do not interfere with each other
 
 ## Stories
 
@@ -21,11 +24,14 @@
     - sharing doucments /pages
   - Adding/deleting teams/members to spaces
 - Create a new:
-  - Team ✅
+  - Team
   - Space
   - Page
   - Document
 
 ## Tasks
+
+- Team
+  - when adding new members, show a display of all the members added to the team and allow creator to select which member should be the manager
 
 ## Bug Fixes

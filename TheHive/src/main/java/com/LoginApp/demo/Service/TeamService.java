@@ -21,10 +21,12 @@ public class TeamService {
         this.teamRepo = tr;
     }
 
+    // The Logged-In user is the manager of the new team
     public ResponseEntity<String> createNewTeam(TeamDTO team) {
         if (team == null)
             return new ResponseEntity<>(null, HttpStatus.PRECONDITION_FAILED);
         Long orgID = UserSession.getInstance().getUser().getOrganizationID();
+        Long uID = UserSession.getInstance().getUser().getUserID();
         Long count = teamRepo.verifyTeamName(team.getTeam_name(), orgID);
         if (count > 0L) {
             return new ResponseEntity<>("Team name already exists within organization", HttpStatus.PRECONDITION_FAILED);
@@ -47,20 +49,21 @@ public class TeamService {
         }
 
         Team newTeam = new Team();
-        newTeam.setOrganizationID(UserSession.getInstance().getUser().getOrganizationID());
+        newTeam.setOrganizationID(orgID);
         newTeam.setName(team.getTeam_name());
         newTeam.setDescription(team.getDescription());
 
         Long teamID = generateTeamID();
         newTeam.setTeamID(teamID);
-        newTeam.setManagerID(UserSession.getInstance().getUser().getUserID());
+        newTeam.setManagerID(uID);
 
         try {
             teamRepo.save(newTeam);
-            teamRepo.updateUserTeamId(newTeam.getTeamID(), newTeam.getOrganizationID(), new ArrayList<>(resultSet));
-//            teamRepo.updateUserManager(newTeam.getTeamID(), UserSession.getInstance().getUser().getOrganizationID(), UserSession.getInstance().getUser().getUserID());
-//            UserSession.getInstance().getUser().setManager(true);
-            UserSession.getInstance().getUser().setCanCreate(true);
+            teamRepo.updateUserTeamId(newTeam.getTeamID(), orgID, new ArrayList<>(resultSet));
+
+            // ToDo: These 2 lines are doing the same thing, need a cleaner way to set permissions in current instance
+            teamRepo.updateUserManager(newTeam.getTeamID(), orgID, uID);
+            UserSession.getInstance().getUser().setCRUDpermissions(true, true, true, true);
         } catch (Exception e) {
             System.out.println("Something went wrong saving the team");
             e.printStackTrace();

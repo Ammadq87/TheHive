@@ -29,10 +29,10 @@ public interface TeamRepo extends JpaRepository<Team, Long> {
     @Query("UPDATE User u SET u.teamID = :teamId, u.CanCreate = False WHERE u.organizationID = :oid AND u.email IN :emailList")
     void updateUserTeamId(@Param("teamId") Long teamId, @Param("oid") Long oid, @Param("emailList") List<String> emailList);
 
-//    @Modifying
-//    @Transactional
-//    @Query("UPDATE User u SET u.isManager = True, u.CanCreate = True, u.CanRead = True, u.CanUpdate = True, u.CanDelete = True, u.teamID = :tid WHERE u.organizationID = :oid AND u.userID = :uid")
-//    void updateUserManager(@Param("tid") Long tid, @Param("oid") Long oid, @Param("uid") Long uid);
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.CanCreate = True, u.CanRead = True, u.CanUpdate = True, u.CanDelete = True, u.teamID = :tid WHERE u.organizationID = :oid AND u.userID = :uid")
+    void updateUserManager(@Param("tid") Long tid, @Param("oid") Long oid, @Param("uid") Long uid);
 
     @Query("SELECT t FROM Team t WHERE t.teamID = :tid AND t.organizationID = :oid")
     Optional<Team> getTeam(@Param("tid") Long tid, @Param("oid") Long oid);
