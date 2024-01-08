@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faCirclePlus} from '@fortawesome/free-solid-svg-icons'
+import {faCirclePlus, faEdit} from '@fortawesome/free-solid-svg-icons'
 import NewTeamForm from "./NewTeamForm";
 
 export default function NewTeam(props) {
@@ -67,8 +67,8 @@ const GenerateNewTeam = (User) => {
     return (
         <div className="mt-4">
             <h2 className="font-bold  text-gray-900 w-full text-xl">New Team</h2>
-            <p className="my-2 justify-between text-sm">If you're starting a new project or initiative and need a team, you can create one from scratch. Click below to get started. You can choose a team name, set its purpose, and invite others to join. When adding members, add all emails. In the team settings, you can select which member would be the manager.</p>
-            <p className="my-2 justify-between text-sm"><span className="font-bold">Note: </span>adding your email will make you the manager of the new team</p>
+            <p className="my-2 justify-between text-sm">If you're starting a new project or initiative and need a team, you can create one from scratch. Choose a team name, set its purpose, and invite others to join. Add all emails of all team members. You can set user permissions on the MyTeam page by clicking the <FontAwesomeIcon icon={faEdit}/> icon</p>
+            <p className="my-2 justify-between text-sm"><span className="font-bold">Note: </span>The user creating the Team would be appointed as the Manager of the team.</p>
             <NewTeamForm/>
         </div>
     )

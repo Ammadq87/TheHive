@@ -61,8 +61,10 @@ export default function NewTeamForm() {
                 x.color = 'red-500';
                 setFormMessage({...x});
             }
-            
-            if (Object.values(formData).some(field => {return field === null || field === undefined})) {
+        
+            const x = formData;
+
+            if (Object.values(x).some(field => {return field === null || field === undefined}) || x.names.length === 0) {
                 alert('Fields incomplete');
                 return;
             }
@@ -128,8 +130,8 @@ export default function NewTeamForm() {
 
     return (
 
-        <div id="parent" className="flex border border-gray-900">
-            <div id="leftHalf" className="border flex w-1/3 p-2 rounded-sm shadow-sm">
+        <div id="parent" className="flex">
+            <div id="leftHalf" className="flex w-1/3 p-2 rounded-sm shadow-sm">
                 <div className="w-full">
                     <div className="flex items-center my-4 w-full">
                         <p className={`font-semibold text-sm mx-2 w-1/3`}><span className="text-red-500">*</span>Team Name:</p>
@@ -159,7 +161,7 @@ export default function NewTeamForm() {
                 </div>
             </div>
 
-            <div id="rightHalf" className="ml-8 w-2/3 border border-red-900">
+            <div id="rightHalf" className="ml-8 w-2/3">
                 
                 <div id="teamInfo">
                     <h2 className={`text-lg font-bold text-${formMessage?.color}`}>{formMessage?.title}</h2>
@@ -169,11 +171,6 @@ export default function NewTeamForm() {
                     }
                     <p className="text-sm font-regular mt-2">{formMessage.description}</p>
                 </div>
-
-                {
-                    // isSubmitted &&
-                    // <TeamView/>
-                }
             </div>
         </div>
     )

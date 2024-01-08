@@ -52,6 +52,7 @@ export default function Teams() {
         try {
             await TeamsModel.updateTeamInfo(newTeamData, User['teamID']);
             setIsEditting(false);
+            alert('Changes Saved');
         } catch (e) {
             console.error(e);
         }
@@ -90,7 +91,7 @@ export default function Teams() {
                         <p className={`font-bold text-gray-900 w-fit text-3xl ${isEditting ? 'border border-gray-500 py-1 pl-1 rounded-sm' : ''}`} contentEditable={isEditting} 
                         onInput={(event) => {handleNewTeamData('team_name', event)}}>{data?.name}</p>
                         {
-                            User?.canUpdate &&
+                            User?.canUpdate && User?.userID === teamData.managerID &&
                             <button onClick={() => {setIsEditting(!isEditting)}}>
                                 {/* Editing enables all MiniMemberDisplays to show/edit permissions */}
                                 <FontAwesomeIcon className="ml-4 text-gray-400" icon={faEdit}/>

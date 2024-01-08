@@ -3,14 +3,11 @@ import com.LoginApp.demo.Model.Team;
 import com.LoginApp.demo.DTO.TeamDTO;
 import com.LoginApp.demo.Model.User;
 import com.LoginApp.demo.Model.UserSession;
-import com.LoginApp.demo.Model.UsersInTeam;
 import com.LoginApp.demo.Repository.TeamRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-
-import javax.swing.text.html.Option;
 import java.util.*;
 
 @Component
@@ -86,9 +83,7 @@ public class TeamService {
         Team oldTeamData = oldTeam.get();
 
         // Update team name
-        System.out.println("==> "+team.getTeam_name());
         oldTeamData.setName(team.getTeam_name());
-        System.out.println("==> "+oldTeamData.getName());
 
         // Update the description
         oldTeamData.setDescription(team.getDescription());
@@ -97,13 +92,13 @@ public class TeamService {
         oldTeamData.setLocation(team.getLocation());
 
         // Update Members
-        team.getMembers().forEach(u -> {
+        team.getMembers().forEach(u ->
             teamRepo.updateUserPermissions(u.getTeamID(), orgID, u.getUserID(),
                     u.getCanCreate(),
                     u.getCanRead(),
                     u.getCanUpdate(),
-                    u.getCanDelete());
-        });
+                    u.getCanDelete())
+        );
 
         // Save and return, reload page to display changes
         teamRepo.save(oldTeamData);
@@ -147,7 +142,7 @@ public class TeamService {
     }
 
     private Long generateTeamID() {
-        String tid = "";
+        String tid;
         Long orgID = UserSession.getInstance().getUser().getOrganizationID();
         do {
             tid = "";
