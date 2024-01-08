@@ -31,6 +31,11 @@ public interface TeamRepo extends JpaRepository<Team, Long> {
 
     @Modifying
     @Transactional
+    @Query("UPDATE User u SET u.teamID = :teamId, u.CanCreate = False WHERE u.organizationID = :oid AND u.email IN :emailList")
+    void updateTeamInfo(@Param("teamId") Long teamId, @Param("oid") Long oid, @Param("emailList") List<String> emailList);
+
+    @Modifying
+    @Transactional
     @Query("UPDATE User u SET u.CanCreate = True, u.CanRead = True, u.CanUpdate = True, u.CanDelete = True, u.teamID = :tid WHERE u.organizationID = :oid AND u.userID = :uid")
     void updateUserManager(@Param("tid") Long tid, @Param("oid") Long oid, @Param("uid") Long uid);
 
@@ -39,4 +44,10 @@ public interface TeamRepo extends JpaRepository<Team, Long> {
 
     @Query("SELECT u FROM User u INNER JOIN Team t ON t.teamID=u.teamID INNER JOIN Organization o ON t.organizationID=o.organizationID WHERE t.teamID=:tid AND t.organizationID=:oid")
     Optional<ArrayList<User>> getMembers(@Param("tid") Long tid, @Param("oid") Long oid);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.CanCreate = :C, u.CanRead = :R, u.CanUpdate = :U, u.CanDelete = :D, u.teamID = :tid WHERE u.organizationID = :oid AND u.userID = :uid")
+    void updateUserPermissions(@Param("tid") Long tid, @Param("oid") Long oid, @Param("uid") Long uid, boolean C, boolean R, boolean U, boolean D);
+
 }

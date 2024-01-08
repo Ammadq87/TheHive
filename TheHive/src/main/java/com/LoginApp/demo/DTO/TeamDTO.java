@@ -10,17 +10,19 @@ public class TeamDTO {
     private String team_name;
     @Transient
     private String description;
-
+    @Transient
+    private String location;
     @Transient
     private ArrayList<String> names;
-
     @Transient
     private ArrayList<User> members;
 
-    public TeamDTO(String team_name, String description, ArrayList<String> names) {
+    public TeamDTO(String team_name, String description, String location, ArrayList<String> names, ArrayList<User> members) {
         this.team_name = team_name;
         this.description = description;
         this.names = names;
+        this.location = location;
+        this.members = members;
     }
 
     public String getTeam_name() {
@@ -43,7 +45,13 @@ public class TeamDTO {
         return names;
     }
 
+    public String getLocation() {
+        return location;
+    }
 
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public void setNames(ArrayList<String> names) {
         this.names = names;

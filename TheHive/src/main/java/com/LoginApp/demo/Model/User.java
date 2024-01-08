@@ -41,7 +41,7 @@ public class User {
     private Long managerID;
 
     @Column(name = "CanCreate")
-    private Boolean CanCreate = true;
+    private Boolean CanCreate = false;
 
     @Column(name = "CanRead")
     private Boolean CanRead = true;

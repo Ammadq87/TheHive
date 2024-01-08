@@ -1,5 +1,10 @@
 # Stories, Tasks, and Bug Fixes
 
+## Currently working on (1/7/24):
+
+- Editing permissions on a team
+- Editing team information
+
 ### Notes
 
 - Spaces > Pages > Documents

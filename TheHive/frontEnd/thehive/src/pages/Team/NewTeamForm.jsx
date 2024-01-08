@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPeopleLine} from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
 import TeamsModel from "./TeamsModel";
+import TeamView from "./TeamView";
 
 const formMessage = {
     title: null,
@@ -20,7 +21,8 @@ const form = {
 export default function NewTeamForm() {
     const [formData, setFormData] = useState(form);
     const [_formMessage, setFormMessage] = useState(formMessage);
- 
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
     const database = axios.create({
         baseURL: 'http://localhost:3000/api/v1'
     });
@@ -58,6 +60,11 @@ export default function NewTeamForm() {
                 x.description = `${data}`;
                 x.color = 'red-500';
                 setFormMessage({...x});
+            }
+            
+            if (Object.values(formData).some(field => {return field === null || field === undefined})) {
+                alert('Fields incomplete');
+                return;
             }
 
             const response = await TeamsModel.createNewTeam(formData)
@@ -100,6 +107,7 @@ export default function NewTeamForm() {
             if ('response' in msg) {
                 const data = msg['response']['data'];
                 x.title = 'Oops!';
+                console.log(data);
                 x.description = `${data}`;
                 x.color = 'red-500';
             } else {
@@ -107,6 +115,7 @@ export default function NewTeamForm() {
                 x.title = 'Yayy!';
                 x.description = `${data}`;
                 x.color = 'green-500';
+                setIsSubmitted(true);
             }
 
         } else {
@@ -120,7 +129,7 @@ export default function NewTeamForm() {
 
     return (
 
-        <div id="parent" className="flex">
+        <div id="parent" className="flex border border-gray-900">
             <div id="leftHalf" className="border flex w-1/3 p-2 rounded-sm shadow-sm">
                 <div className="w-full">
                     <div className="flex items-center my-4 w-full">
@@ -151,13 +160,21 @@ export default function NewTeamForm() {
                 </div>
             </div>
 
-            <div id="rightHalf" className="ml-8 w-1/4">
-                <h2 className={`text-lg font-bold text-${formMessage?.color}`}>{formMessage?.title}</h2>
+            <div id="rightHalf" className="ml-8 w-2/3 border border-red-900">
+                
+                <div id="teamInfo">
+                    <h2 className={`text-lg font-bold text-${formMessage?.color}`}>{formMessage?.title}</h2>
+                    {
+                        formMessage?.title &&
+                        <hr />
+                    }
+                    <p className="text-sm font-regular mt-2">{formMessage.description}</p>
+                </div>
+
                 {
-                    formMessage?.title &&
-                    <hr />
+                    // isSubmitted &&
+                    // <TeamView/>
                 }
-                <p className="text-sm font-regular mt-2">{formMessage.description}</p>
             </div>
         </div>
     )

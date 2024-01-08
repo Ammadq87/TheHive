@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.Option;
 import java.util.*;
 
 @Component
@@ -52,6 +53,7 @@ public class TeamService {
         newTeam.setOrganizationID(orgID);
         newTeam.setName(team.getTeam_name());
         newTeam.setDescription(team.getDescription());
+        newTeam.setLocation(team.getLocation());
 
         Long teamID = generateTeamID();
         newTeam.setTeamID(teamID);
@@ -71,6 +73,42 @@ public class TeamService {
 
         UserSession.getInstance().getUser().setTeamID(teamID);
         return new ResponseEntity<>("Success, your new team, "+newTeam.getName()+", has been created. Go to MyTeams and view your newly created team.$$"+newTeam.getTeamID(), HttpStatus.OK);
+    }
+
+    public ResponseEntity<String> updateTeamInfo(Long teamID, TeamDTO team) {
+        Long orgID = UserSession.getInstance().getUser().getOrganizationID();
+        Optional<Team> oldTeam = teamRepo.getTeam(teamID, orgID);
+
+        if (oldTeam.isEmpty()) {
+            return new ResponseEntity<>("teamID [" + teamID + "] does not exist", HttpStatus.PRECONDITION_FAILED);
+        }
+
+        Team oldTeamData = oldTeam.get();
+
+        // Update team name
+        System.out.println("==> "+team.getTeam_name());
+        oldTeamData.setName(team.getTeam_name());
+        System.out.println("==> "+oldTeamData.getName());
+
+        // Update the description
+        oldTeamData.setDescription(team.getDescription());
+
+        // Update Location
+        oldTeamData.setLocation(team.getLocation());
+
+        // Update Members
+        team.getMembers().forEach(u -> {
+            teamRepo.updateUserPermissions(u.getTeamID(), orgID, u.getUserID(),
+                    u.getCanCreate(),
+                    u.getCanRead(),
+                    u.getCanUpdate(),
+                    u.getCanDelete());
+        });
+
+        // Save and return, reload page to display changes
+        teamRepo.save(oldTeamData);
+
+        return new ResponseEntity<>(oldTeamData.toString(), HttpStatus.OK);
     }
 
     public ResponseEntity<Team> getTeam (Long tid) {

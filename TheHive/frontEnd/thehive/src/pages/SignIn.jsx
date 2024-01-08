@@ -38,12 +38,7 @@ export default function Login (){
             setMessage(`${err['response']['data']}`);
             setMessagecolor('red');
         }
-
     }
-
-    useEffect(() => {
-        console.log(formData);
-    }, [formData])
 
     return (
         <div className="flex m-auto w-full items-center">

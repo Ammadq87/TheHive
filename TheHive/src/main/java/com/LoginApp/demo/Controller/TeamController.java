@@ -3,6 +3,7 @@ import com.LoginApp.demo.Model.Team;
 import com.LoginApp.demo.DTO.TeamDTO;
 import com.LoginApp.demo.Service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,11 @@ public class TeamController {
     @PostMapping("/createNewTeam")
     public ResponseEntity<String> createNewTeam(@RequestBody TeamDTO t) {
         return teamService.createNewTeam(t);
+    }
+
+    @PutMapping("/updateTeamInfo/{teamID}")
+    public ResponseEntity<String> updateTeamInfo(@PathVariable("teamID") Long teamID, @RequestBody TeamDTO team) {
+        return teamService.updateTeamInfo(teamID, team);
     }
 
     @GetMapping("/{id}")

@@ -18,7 +18,7 @@ public class Team {
     private String description;
 
     @Column(name = "Location", nullable = true)
-    private String location = "Canada";
+    private String location;
 
     @Column(name = "managerID")
     private Long managerID;

@@ -4,12 +4,14 @@ import axios from "axios";
 import TeamsModel from "./TeamsModel";
 import MiniMemberDisplay from "../../components/MiniMemberDisplay";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faL } from '@fortawesome/free-solid-svg-icons'
 
 export default function Teams() {
 
     const User = JSON.parse(sessionStorage.getItem('User'));
     const [teamData, setTeamData] = useState(null);
+    const [isEditting, setIsEditting] = useState(false);
+    const [newTeamData, setNewTeamData] = useState(null);
 
     if (!User) {
         return (
@@ -21,14 +23,40 @@ export default function Teams() {
 
     const [teamSectionBtnColor, setTeamSectionBtnColor] = useState('YourTeam');
 
+    //#region Editing Functions
+    const handleNewTeamData = (field, event) => {
+        let x = newTeamData;
+        if (field !== 'members') {
+            x[field] = event.target.textContent;
+        } 
+    }
+
+    //#endregion
+
     //#region API/Database Calls
     async function fetchData() {
         try {
             const data = await TeamsModel.getTeamData();
             console.log(data);
             setTeamData(data); // Update teamData using state
+            setNewTeamData(data);
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    async function updateTeamInfo() {
+        const oldData = teamData;
+        const x = newTeamData;
+        x.members = oldData.members;
+        setNewTeamData({...x});
+        console.log(x);
+        try {
+            const data = await TeamsModel.updateTeamInfo(newTeamData, User['teamID']);
+            console.log(data);
+            setIsEditting(false);
+        } catch (e) {
+            console.error(e);
         }
     }
 
@@ -62,26 +90,33 @@ export default function Teams() {
             return (
                 <div className='block mt-4'>
                     <div id="header" className="flex w-full items-center">
-                        <h2 className="font-bold  text-gray-900 w-fit text-3xl">{data?.name}</h2>
+                        <p className={`font-bold text-gray-900 w-fit text-3xl ${isEditting ? 'border border-gray-500 py-1 pl-1 rounded-sm' : ''}`} contentEditable={isEditting} 
+                        onInput={(event) => {handleNewTeamData('team_name', event)}}>{data?.name}</p>
                         {
                             User?.canUpdate &&
-                            <a href="/teams/edit">
+                            <button onClick={() => {setIsEditting(!isEditting)}}>
+                                {/* Editing enables all MiniMemberDisplays to show/edit permissions */}
                                 <FontAwesomeIcon className="ml-4 text-gray-400" icon={faEdit}/>
-                            </a>
+                            </button>
                         }
                     </div>
                     <hr />
                     
                     <h3 className="font-semibold text-xl mt-4">Description</h3>
-                    <p className="text-sm">{data?.description}</p>
-        
+                    <p className={`text-sm ${isEditting ? 'border border-gray-500 py-1 pl-1 rounded-sm' : ''}`} contentEditable={isEditting} 
+                    onInput={(event) => {handleNewTeamData('description', event)}}>{data?.description}</p>
+
+                    <h3 className="font-semibold text-xl mt-4">Location</h3>
+                    <p className={`text-sm ${isEditting ? 'border border-gray-500 py-1 pl-1 rounded-sm' : ''}`} contentEditable={isEditting}
+                    onInput={(event) => {handleNewTeamData('location', event)}}>{data?.location}</p>
+
                     <h3 className="font-semibold text-xl mt-4">Members</h3>
                     <h2>Manager(s): </h2>
                     {
                         data?.members.map((m, i) => {
                             return (
                                 m.userID === data.managerID &&
-                                <MiniMemberDisplay name={teamData?.name} data={m} key={i}/>
+                                <MiniMemberDisplay type={isEditting ? 'edit' : 'basic'} team={teamData} data={m} key={i}/>
                             )
                         })
                     }
@@ -91,12 +126,21 @@ export default function Teams() {
                             data?.members?.map((m, i) => {
                                 return (
                                     m.userID !== data.managerID &&
-                                    <MiniMemberDisplay name={teamData?.name} data={m} key={i}/>
+                                    <MiniMemberDisplay type={isEditting ? 'edit' : 'basic'} team={teamData} data={m} key={i}/>
                                 )
                             })
                         }
                     </div>
-                    <button onClick={() => {addNewTeamMember()}} className="mt-2 px-4 border bg-blue-500 text-white border-blue-500 font-bold p-1 text-sm rounded-md">Add a Member</button>
+
+                    {
+                        !isEditting &&
+                        <button onClick={() => {addNewTeamMember()}} className="mt-2 px-4 border bg-blue-500 text-white border-blue-500 font-bold p-1 text-sm rounded-md">Add a Member</button>
+                    }
+
+                    {
+                        isEditting &&
+                        <button onClick={() => {updateTeamInfo()}} className="mt-2 px-4 border bg-green-500 text-white border-green-500 font-bold p-1 text-sm rounded-md">Save Changes</button>
+                    }
                 </div>
             )
         }
@@ -148,7 +192,5 @@ export default function Teams() {
             </div>
         </div>
     )
-
-
 }
 

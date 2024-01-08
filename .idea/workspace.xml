@@ -7,11 +7,15 @@
     <list default="true" id="289f692e-a0f2-4ab0-b12e-86f12a9fde57" name="Changes" comment="Added auth controller to process sign-in, sign-out, and register">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/ToDo.md" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/ToDo.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/public/vite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/assets/react.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/NewTeam.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/NewTeam.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/components/MiniMemberDisplay.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/components/MiniMemberDisplay.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/components/Navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/components/Navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/SignIn.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/SignIn.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/NewTeamForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/NewTeamForm.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/Teams.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/Teams.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/TeamsModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/frontEnd/thehive/src/pages/Team/TeamsModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Controller/TeamController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/DTO/TeamDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/DTO/TeamDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Model/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Model/Team.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Repository/TeamRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Repository/TeamRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TheHive/src/main/java/com/LoginApp/demo/Service/TeamService.java" afterDir="false" />
