@@ -32,7 +32,21 @@ export default class TeamsModel {
             const response = await this.database.get(`/team/${teamID}`);
             return response.data;
         } catch (e) {
-            console.log(e);
+            console.error(e);
+        }
+    }
+
+    /**
+     * 
+     * @param {{team_name,description,location,names}} data 
+     * @param {number} teamID 
+     */
+    static async updateTeamInfo(data, teamID) {
+        try {
+            const response = await this.database.put(`/team/updateTeamInfo/${teamID}`, data);
+            return response.data;
+        } catch (e) {
+            console.error(e);
         }
     }
 

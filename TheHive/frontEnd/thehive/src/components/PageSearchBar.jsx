@@ -28,7 +28,7 @@ export default function PageSearchBar(props) {
                 setResults([...x]);
                 sendToPage();
             } catch (e) {
-                console.log(e);
+                console.error(e);
             }
         }
     }

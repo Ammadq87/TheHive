@@ -34,8 +34,6 @@ export default function Register (){
 
     const handleSubmit = async (e) => {
         const registerForm = formData;
-        
-        console.log(registerForm)
         let filledOut = true;
         Object.keys(registerForm).forEach((field) => {
             if (registerForm[field] !== null) {
@@ -80,7 +78,7 @@ export default function Register (){
             setMessagecolor('green');
 
         } catch (e) {
-            console.log(e);
+            console.error(e);
             setMessage(e.response.data);
             setMessagecolor('red');
         }
