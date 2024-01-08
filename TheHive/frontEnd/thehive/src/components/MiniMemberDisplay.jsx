@@ -28,7 +28,6 @@ export default function MiniMemberDisplay({type = 'basic', data, team}) {
                     <a className="font-bold text-md" href={`${profileLink}`}>{data?.firstName + " " + data?.lastName} {isMe ? '(Me)' : ''}</a>
                     <p className="text-xs italic">{data?.email}</p>
                     <p className="text-sm italic">{data?.role}</p>
-
                     <div id="permissions" className="flex">
                         {
                             CRUD.map((perm, i) => {
@@ -71,6 +70,4 @@ export default function MiniMemberDisplay({type = 'basic', data, team}) {
             </a>
         )
     }
-
-    console.log(data);
 }

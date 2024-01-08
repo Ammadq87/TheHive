@@ -35,9 +35,9 @@ export default function NewSpace() {
         setSpaceCreationForm({...spc});
     };
 
-    useEffect(() => {
-        console.log(spaceCreationForm)
-    }, [spaceCreationForm]);
+    // useEffect(() => {
+    //     console.log(spaceCreationForm)
+    // }, [spaceCreationForm]);
 
     const handleSelection = (opt) => {
         for (let i=0; i<spaces.length; i++) 

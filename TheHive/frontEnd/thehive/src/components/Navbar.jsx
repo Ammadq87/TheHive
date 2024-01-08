@@ -14,7 +14,7 @@ export default function Navbar() {
     }
 
     const handleDataFromSearch = (data) => {
-        console.log(data);
+        // console.log(data);
     }
 
     useEffect(() => {
@@ -24,19 +24,16 @@ export default function Navbar() {
     async function signOut() {
         sessionStorage.removeItem("User");
         location.href = '/';
-        const response = await UserModel.signOut();
-        console.log(response);
+        await UserModel.signOut();
     }
 
     return (
-
         <div id='navbar' className='block w-screen shadow-sm z-50 relative'>
             <div className='bg-white flex h-16 items-center '>
                 <div id="logo" className='flex bg-white m-4'>
                     <img src={logo} alt="CoCreate Logo" className='w-12 h-12'/>
                     <a href="/" className='bg-white'><h1 className='text-purple-600 text-2xl font-bold m-2 bg-white'>CoCreate</h1></a>
                 </div>
-
                 <div id="links" className='items-center'>
                     <ul>
                         <a href='/home'><li>Home</li></a>
@@ -46,7 +43,6 @@ export default function Navbar() {
                         <a className='text-white font-semibold h-10 w-24 border text-center pt-2 rounded-md bg-purple-700' href='/create'>Create</a>
                     </ul>
                 </div>
-            
                 {
                     signedIn &&
                     <div id='personal' className='flex ml-auto items-center bg-white mr-4'>
@@ -57,7 +53,6 @@ export default function Navbar() {
                         </ul>
                     </div>
                 }
-
                 {
                     !signedIn &&
                     <div id='signedOut' className='block ml-auto'>

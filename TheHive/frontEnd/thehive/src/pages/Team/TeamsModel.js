@@ -32,7 +32,7 @@ export default class TeamsModel {
             const response = await this.database.get(`/team/${teamID}`);
             return response.data;
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
     }
 

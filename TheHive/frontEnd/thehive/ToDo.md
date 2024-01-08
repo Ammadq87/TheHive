@@ -2,8 +2,8 @@
 
 ## Currently working on (1/7/24):
 
-- Editing permissions on a team
-- Editing team information
+- Editing team information and managing permissions completed
+- Cleaning up code
 
 ### Notes
 
@@ -16,20 +16,21 @@
 
 - Teams
   - Your Team
-    - Managing your team
+    - Managing your team ✅
+      - Editing Team information and member permissions ✅
     - Send invite to new team member to join
   - Other Teams
     - Viewing/searching for other teams
   - Search for teams
   - Joining a new team
-  - Team Permissions
+  - Team Permissions ✅
 - Spaces
   - Creating/deleting spaces
   - Creating posts on spaces
     - sharing doucments /pages
   - Adding/deleting teams/members to spaces
 - Create a new:
-  - Team
+  - Team ✅ [🐞](#Create-Team-Mandatory-Field-Checks)
   - Space
   - Page
   - Document
@@ -40,3 +41,6 @@
   - when adding new members, show a display of all the members added to the team and allow creator to select which member should be the manager
 
 ## Bug Fixes
+
+- #### Create Team Mandatory Field Checks
+  - Users can bypass mandatory field checks when creating new team

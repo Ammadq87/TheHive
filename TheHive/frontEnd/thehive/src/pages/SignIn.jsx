@@ -27,14 +27,12 @@ export default function Login (){
             setMessage(response['data']);
             setMessagecolor('green');
 
-            console.log(response['data']);
-
             const userData = await database.get('/user/');
-            console.log(userData['data']);
             sessionStorage.setItem("User", JSON.stringify(userData['data']));
             location.href = '/'
+            console.log('Successfully Logged In');
         } catch (err) {
-            console.log(err);
+            console.error(err);
             setMessage(`${err['response']['data']}`);
             setMessagecolor('red');
         }

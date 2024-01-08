@@ -37,11 +37,10 @@ export default function Teams() {
     async function fetchData() {
         try {
             const data = await TeamsModel.getTeamData();
-            console.log(data);
             setTeamData(data); // Update teamData using state
             setNewTeamData(data);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -50,10 +49,8 @@ export default function Teams() {
         const x = newTeamData;
         x.members = oldData.members;
         setNewTeamData({...x});
-        console.log(x);
         try {
-            const data = await TeamsModel.updateTeamInfo(newTeamData, User['teamID']);
-            console.log(data);
+            await TeamsModel.updateTeamInfo(newTeamData, User['teamID']);
             setIsEditting(false);
         } catch (e) {
             console.error(e);

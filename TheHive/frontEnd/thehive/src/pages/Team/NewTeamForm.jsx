@@ -57,7 +57,7 @@ export default function NewTeamForm() {
             if (sessionStorage.getItem('User').teamID) {
                 const x = formMessage;
                 x.title = 'Oops!';
-                x.description = `${data}`;
+                x.description = `Something went wrong creating the team :(`;
                 x.color = 'red-500';
                 setFormMessage({...x});
             }
@@ -71,7 +71,7 @@ export default function NewTeamForm() {
             createFormMsg(response);
             setNewTeamID(response);
         } catch (e) {
-            // console.log(e);
+            console.error(e);
             createFormMsg(e);
         }
     }
@@ -107,7 +107,6 @@ export default function NewTeamForm() {
             if ('response' in msg) {
                 const data = msg['response']['data'];
                 x.title = 'Oops!';
-                console.log(data);
                 x.description = `${data}`;
                 x.color = 'red-500';
             } else {

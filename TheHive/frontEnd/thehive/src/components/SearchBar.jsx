@@ -29,7 +29,7 @@ export default function SearchBar(props) {
                     console.log(x);
                     setResults([...x]);
                 } catch (e) {
-                    console.log(e);
+                    console.error(e);
                 }
             }
     
