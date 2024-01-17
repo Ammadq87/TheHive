@@ -24,6 +24,7 @@ CREATE TABLE Space (
 
 CREATE TABLE Team (
 	teamID BIGINT NOT NULL,
+    managerID BIGINT NOT NULL,
     organizationID BIGINT NOT NULL,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(1000) NOT NULL,
@@ -42,7 +43,6 @@ CREATE TABLE User (
     teamID BIGINT DEFAULT -1,
     role VARCHAR(255),
     description VARCHAR(255),
-    isManager TINYINT DEFAULT 0,
     CanCreate TINYINT DEFAULT 0,
     CanUpdate TINYINT DEFAULT 0,
     CanRead TINYINT DEFAULT 1,

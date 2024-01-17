@@ -49,6 +49,9 @@ export default function Teams() {
         const x = newTeamData;
         x.members = oldData.members;
         setNewTeamData({...x});
+
+        console.log(x);
+
         try {
             await TeamsModel.updateTeamInfo(newTeamData, User['teamID']);
             setIsEditting(false);
@@ -191,4 +194,5 @@ export default function Teams() {
         </div>
     )
 }
+
 

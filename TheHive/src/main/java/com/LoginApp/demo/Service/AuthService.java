@@ -27,6 +27,7 @@ public class AuthService {
         if (UserSession.getInstance().getUser() == null)
             return new ResponseEntity<>("Cannot Sign Out - User Not Logged In", HttpStatus.BAD_REQUEST);
 
+        System.out.println(UserSession.getInstance().getUser().getEmail() + " has logged out.");
         UserSession.getInstance().setUser(null);
         return new ResponseEntity<>("Successfully Logged Out", HttpStatus.OK);
     }
