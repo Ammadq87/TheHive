@@ -83,21 +83,24 @@ public class TeamService {
         Team oldTeamData = oldTeam.get();
 
         // Update team name
-        oldTeamData.setName(team.getTeam_name());
+        if (team.getTeam_name() != null)
+            oldTeamData.setName(team.getTeam_name());
 
         // Update the description
-        oldTeamData.setDescription(team.getDescription());
+        if (team.getDescription() != null)
+            oldTeamData.setDescription(team.getDescription());
 
         // Update Location
-        oldTeamData.setLocation(team.getLocation());
+        if (team.getLocation() != null)
+            oldTeamData.setLocation(team.getLocation());
 
         // Update Members
         team.getMembers().forEach(u ->
-            teamRepo.updateUserPermissions(u.getTeamID(), orgID, u.getUserID(),
-                    u.getCanCreate(),
-                    u.getCanRead(),
-                    u.getCanUpdate(),
-                    u.getCanDelete())
+                teamRepo.updateUserPermissions(u.getTeamID(), orgID, u.getUserID(),
+                        u.getCanCreate(),
+                        u.getCanRead(),
+                        u.getCanUpdate(),
+                        u.getCanDelete())
         );
 
         // Save and return, reload page to display changes
