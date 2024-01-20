@@ -1,10 +1,8 @@
-DROP SCHEMA TheHive;
-
-CREATE SCHEMA TheHive;
+CREATE SCHEMA IF NOT EXISTS TheHive;
 
 USE TheHive;
 
-CREATE TABLE Organization (
+CREATE TABLE IF NOT EXISTS TheHive.Organization (
 	organizationID BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY (organizationID)
@@ -14,7 +12,7 @@ CREATE TABLE Organization (
 INSERT INTO Organization VALUES 
 (100, 'Nestle');
 
-CREATE TABLE Space (
+CREATE TABLE IF NOT EXISTS TheHive.Space (
 	spaceID BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     organizationID BIGINT NOT NULL,
@@ -22,7 +20,7 @@ CREATE TABLE Space (
     FOREIGN KEY (organizationID) REFERENCES Organization(organizationID)
 );
 
-CREATE TABLE Team (
+CREATE TABLE IF NOT EXISTS TheHive.Team (
 	teamID BIGINT NOT NULL,
     managerID BIGINT NOT NULL,
     organizationID BIGINT NOT NULL,
@@ -33,7 +31,7 @@ CREATE TABLE Team (
 	FOREIGN KEY (organizationID) REFERENCES Organization(organizationID)
 );
 
-CREATE TABLE User (
+CREATE TABLE IF NOT EXISTS TheHive.User (
 	userID BIGINT NOT NULL AUTO_INCREMENT,
     email VARCHAR (255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -52,14 +50,14 @@ CREATE TABLE User (
 	FOREIGN KEY (teamID) REFERENCES Team(teamID)
 );
 
-CREATE TABLE AdminsInspace (
+CREATE TABLE IF NOT EXISTS TheHive.AdminsInspace (
 	userID BIGINT NOT NULL,
 	spaceID BIGINT NOT NULL,
 	FOREIGN KEY (spaceID) REFERENCES space(spaceID),
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
 
-CREATE TABLE UsersInspace (
+CREATE TABLE IF NOT EXISTS TheHive.UsersInspace (
 	userID BIGINT NOT NULL,
 	spaceID BIGINT NOT NULL,
 	FOREIGN KEY (spaceID) REFERENCES space(spaceID),
@@ -67,7 +65,7 @@ CREATE TABLE UsersInspace (
 );
 
 -- Every space must have a main page for blog posts
-CREATE TABLE Page (
+CREATE TABLE IF NOT EXISTS TheHive.Page (
 	pageID BIGINT NOT NULL AUTO_INCREMENT,
     spaceID BIGINT NOT NULL,
     userID BIGINT NOT NULL,
@@ -79,7 +77,7 @@ CREATE TABLE Page (
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
 
-CREATE TABLE Post (
+CREATE TABLE IF NOT EXISTS TheHive.Post (
 	postID BIGINT NOT NULL AUTO_INCREMENT,
     spaceID BIGINT NOT NULL,
     pageID BIGINT NOT NULL,
@@ -95,7 +93,7 @@ CREATE TABLE Post (
     FOREIGN KEY (userID) REFERENCES User(userID)
 );
 
-CREATE TABLE Permissions (
+CREATE TABLE IF NOT EXISTS TheHive.Permissions (
 	userID BIGINT NOT NULL,
     spaceID BIGINT NOT NULL,
     pageID BIGINT NOT NULL,
